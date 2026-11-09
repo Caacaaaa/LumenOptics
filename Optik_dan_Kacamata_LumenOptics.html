@@ -1,0 +1,2431 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LUMEN OPTICS - Next-Gen Eyewear Experience</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = { theme: { extend: {
+            colors: {
+                cyber: { cyan: '#2447e0', purple: '#0f766e', magenta: '#b42318', gold: '#b07a12' },
+                ink: '#15171c',
+                slate: { 100:'#1c1f26', 200:'#1c1f26', 300:'#3d434d', 400:'#5f6670', 500:'#7d848d', 600:'#9aa0a8',
+                         700:'#c3c8c6', 800:'#d7dad4', 900:'#fafaf8', 950:'#eef0eb' }
+            },
+            fontFamily: { sans: ['"Hanken Grotesk"', 'sans-serif'], tech: ['"Hanken Grotesk"', 'sans-serif'],
+                          display: ['"Familjen Grotesk"', 'sans-serif'] }
+        } } }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@500;600;700&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        body { font-family: 'Hanken Grotesk', sans-serif; background: #f1f2ee; color: #15171c; overflow-x: hidden; line-height: 1.55; }
+        h1, h2, h3, .font-display, h1.font-tech, h2.font-tech, h3.font-tech { font-family: 'Familjen Grotesk', sans-serif; font-weight: 600; letter-spacing: -0.015em; }
+        .cyber-glass { background: #fafaf8; border: 1px solid #d7dad4; }
+        .cyber-glass-glow { background: #fafaf8; border: 1px solid #d7dad4; box-shadow: 0 24px 60px rgba(21,23,28,.18); }
+        @keyframes laserScan { from { top: 0%; } to { top: 100%; } }
+        .laser-line { position: absolute; left: 0; width: 100%; height: 2px; background: #2447e0; z-index: 20; display: none; }
+        .laser-scanning { display: block; animation: laserScan 2s ease-in-out infinite alternate; }
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f2ee; }
+        ::-webkit-scrollbar-thumb { background: #c3c8c6; border-radius: 4px; }
+        input[type=range] { -webkit-appearance: none; appearance: none; background: #c3c8c6; border-radius: 9999px; height: 3px; }
+        input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; height: 16px; width: 16px; border-radius: 50%; background: #15171c; border: 3px solid #f1f2ee; box-shadow: 0 0 0 1px #15171c; cursor: pointer; }
+        input[type=range]::-moz-range-thumb { height: 12px; width: 12px; border-radius: 50%; background: #15171c; border: 3px solid #f1f2ee; cursor: pointer; }
+        :focus-visible { outline: 2px solid #2447e0; outline-offset: 2px; }
+
+        /* ===== LUMEN OPTICS UX REFINEMENT ===== */
+        :root { --lo-accent:#2447e0; --lo-ink:#15171c; --lo-muted:#6f747c; --lo-line:#d7dad4; --lo-surface:#fafaf8; }
+        body { background:#f5f5f1; color:var(--lo-ink); }
+        header { box-shadow:0 1px 0 rgba(21,23,28,.04); }
+        a, button, select, input { -webkit-tap-highlight-color:transparent; }
+        a:focus-visible, button:focus-visible, select:focus-visible, input:focus-visible { outline:2px solid var(--lo-accent); outline-offset:3px; }
+        .lo-section-kicker { letter-spacing:.12em; text-transform:uppercase; font-size:10px; font-weight:700; color:var(--lo-accent); }
+        .lo-filter { min-height:42px; background:#fff; border:1px solid var(--lo-line); color:var(--lo-ink); }
+        .lo-filter:hover { border-color:#aeb4ad; }
+        .lo-product-card { background:#fff; border:1px solid var(--lo-line); box-shadow:0 8px 28px rgba(21,23,28,.04); }
+        .lo-product-card:hover { transform:translateY(-3px); box-shadow:0 16px 36px rgba(21,23,28,.08); border-color:#bfc5be; }
+        .lo-product-media { background:#eceee9; }
+        .lo-buy { min-height:44px; }
+        .lo-meta { color:#747a82; }
+        @media (max-width:767px){
+          header .max-w-7xl { height:60px; }
+          .lo-mobile-hide { display:none!important; }
+          #catalog .catalog-toolbar { align-items:stretch; }
+          #catalog .catalog-toolbar > div:last-child { width:100%; }
+          #catalog select { flex:1; min-width:0; }
+        }
+        @media (prefers-reduced-motion:reduce){ * { scroll-behavior:auto!important; transition-duration:.01ms!important; animation-duration:.01ms!important; } }
+
+        /* ===== AUTH / CHECKOUT ===== */
+        .lo-input { width:100%; background:#fff; border:1px solid var(--lo-line); border-radius:6px; padding:10px 12px; font-size:13px; color:var(--lo-ink); outline:none; }
+        .lo-input:focus { border-color:var(--lo-accent); }
+        .lo-input[aria-invalid="true"] { border-color:#b42318; background:#fff7f6; }
+        .lo-label { display:block; font-size:11px; font-weight:600; color:#5f6670; margin-bottom:4px; }
+        .lo-opt { display:flex; gap:10px; align-items:flex-start; border:1px solid var(--lo-line); background:#fff; border-radius:8px; padding:10px 12px; cursor:pointer; font-size:12px; }
+        .lo-opt:hover { border-color:#aeb4ad; }
+        .lo-opt:has(input:checked) { border-color:var(--lo-accent); box-shadow:inset 0 0 0 1px var(--lo-accent); background:#f3f5ff; }
+        .lo-opt input { accent-color:#2447e0; margin-top:2px; }
+        .lo-tab { flex:1; padding:10px; font-size:13px; font-weight:700; border-bottom:2px solid transparent; color:#5f6670; }
+        .lo-tab[aria-selected="true"] { color:var(--lo-ink); border-bottom-color:var(--lo-accent); }
+        .lo-err { color:#b42318; font-size:12px; min-height:18px; }
+        #lo-toast { position:fixed; left:50%; bottom:24px; transform:translateX(-50%) translateY(20px); background:#15171c; color:#fff; padding:10px 18px; border-radius:999px; font-size:13px; z-index:80; opacity:0; pointer-events:none; transition:all .25s; max-width:90vw; text-align:center; }
+        #lo-toast.on { opacity:1; transform:translateX(-50%) translateY(0); }
+
+        /* ===== RESEP, KERANJANG, PESANAN ===== */
+        #lens-modal label:has(> input[name="lens-type"]:checked) { border-color:var(--lo-accent); box-shadow:inset 0 0 0 1px var(--lo-accent); background:#f3f5ff; }
+        .cfg-swatch { width:34px; height:34px; border-radius:9999px; border:1px solid #aeb4ad; cursor:pointer; }
+        .cfg-swatch[aria-pressed="true"] { box-shadow:0 0 0 2px #fff, 0 0 0 4px var(--lo-accent); }
+        .rx-in { text-align:center; padding:7px 6px; font-size:13px; }
+        .qty-btn { width:28px; height:28px; display:flex; align-items:center; justify-content:center; color:#3d434d; }
+        .qty-btn:hover:not(:disabled) { background:#eef0eb; }
+        .qty-btn:disabled { opacity:.35; cursor:not-allowed; }
+        .lo-order { border:1px solid var(--lo-line); border-radius:10px; background:#fff; }
+        .lo-order > summary { cursor:pointer; list-style:none; padding:14px 16px; }
+        .lo-order > summary::-webkit-details-marker { display:none; }
+        .lo-order[open] > summary { border-bottom:1px solid var(--lo-line); }
+    </style>
+</head>
+<body class="antialiased selection:bg-cyber-cyan selection:text-ink">
+
+    <!-- Navigation Bar -->
+    <header class="sticky top-0 z-50 bg-slate-950/95 backdrop-blur border-b border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            
+            <a href="#" class="flex items-center gap-3" onclick="playAudio('click')">
+                <svg width="38" height="18" viewBox="0 0 38 18" fill="none" stroke="#15171c" stroke-width="2" aria-hidden="true"><circle cx="9" cy="9" r="7.5"/><circle cx="29" cy="9" r="7.5"/><path d="M16.5 8c1.5-1.5 3.5-1.5 5 0"/></svg>
+                <span class="font-display text-xl font-semibold text-ink max-[420px]:hidden">Lumen Optics</span>
+            </a>
+
+            <nav class="hidden md:flex items-center gap-8 text-sm text-slate-300">
+                <a href="#tryon-studio" class="hover:text-cyber-cyan transition-colors" onclick="playAudio('click')">Try-on</a>
+                <a href="#vision-simulator" class="hover:text-cyber-cyan transition-colors" onclick="playAudio('click')">Simulasi lensa</a>
+                <a href="#catalog" class="hover:text-cyber-cyan transition-colors" onclick="playAudio('click')">Katalog</a>
+                <a href="#catalog" class="hover:text-cyber-cyan transition-colors" onclick="event.preventDefault(); openLensCrafterModalCurrent()">Konfigurasi lensa</a>
+            </nav>
+
+            <!-- Actions Right -->
+            <div class="flex items-center gap-2 sm:gap-4">
+                <!-- SFX Toggle -->
+                <button id="sfx-toggle-btn" onclick="toggleSFX()" class="w-10 h-10 rounded-md cyber-glass flex items-center justify-center text-slate-300 hover:text-cyber-cyan hover:border-cyber-cyan/50 transition-all" title="Toggle Sound FX">
+                    <i class="fa-solid fa-volume-high text-sm" id="sfx-icon"></i>
+                </button>
+
+                <!-- Comparison Drawer Trigger -->
+                <button onclick="openSnapshotModal()" class="relative w-10 h-10 rounded-md cyber-glass flex items-center justify-center text-slate-300 hover:text-cyber-cyan hover:border-cyber-cyan/50 transition-all" title="Snapshot Comparison">
+                    <i class="fa-solid fa-images text-sm"></i>
+                    <span id="snapshot-badge" class="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-cyber-purple text-[#fff] text-[11px] font-bold flex items-center justify-center hidden">0</span>
+                </button>
+
+                <!-- Orders -->
+                <button onclick="openOrdersModal()" class="relative w-10 h-10 rounded-md cyber-glass flex items-center justify-center text-slate-300 hover:text-cyber-cyan hover:border-cyber-cyan/50 transition-all" title="Pesanan saya" aria-label="Pesanan saya">
+                    <i class="fa-solid fa-receipt text-sm"></i>
+                    <span id="orders-badge" class="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-cyber-purple text-[#fff] text-[11px] font-bold flex items-center justify-center hidden">0</span>
+                </button>
+
+                <!-- Auth -->
+                <button id="auth-btn" onclick="openAuthModal('login')" class="h-10 px-3 rounded-md cyber-glass flex items-center gap-2 text-sm text-slate-300 hover:text-cyber-cyan transition-all" title="Masuk atau daftar">
+                    <i class="fa-regular fa-user text-sm"></i><span class="hidden sm:inline font-medium">Masuk</span>
+                </button>
+                <div id="user-chip" class="hidden h-10 pl-3 pr-1 rounded-md cyber-glass items-center gap-2 text-sm">
+                    <i class="fa-solid fa-circle-user text-cyber-cyan"></i>
+                    <span id="user-name" class="hidden sm:inline font-medium text-ink max-w-[120px] truncate"></span>
+                    <button onclick="logout()" class="w-8 h-8 rounded-md text-slate-400 hover:text-cyber-magenta" title="Keluar" aria-label="Keluar"><i class="fa-solid fa-right-from-bracket text-sm"></i></button>
+                </div>
+
+                <!-- Cart Drawer Trigger -->
+                <button onclick="toggleCartDrawer()" class="relative px-4 py-2 rounded-md bg-ink text-slate-950 hover:opacity-90 transition-opacity flex items-center gap-2 font-medium text-sm">
+                    <i class="fa-solid fa-bag-shopping"></i>
+                    <span class="hidden sm:inline">Keranjang</span>
+                    <span id="cart-badge" class="ml-1 px-2 py-0.5 rounded-full bg-cyber-cyan text-slate-950 text-xs font-bold">0</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="border-b border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 lg:pt-16">
+            <div class="grid lg:grid-cols-12 gap-10 items-end">
+                <div class="lg:col-span-8">
+                    <h1 class="text-ink leading-[1.03] tracking-tight">
+                        <span class="block" style="font-size:clamp(3.5rem,11vw,8.5rem)">Coba</span>
+                        <span class="block" style="font-size:clamp(2.5rem,7.5vw,5.75rem)">kacamatanya</span>
+                        <span class="block" style="font-size:clamp(1.75rem,4.8vw,3.6rem)">langsung di wajah,</span>
+                        <span class="block text-slate-400" style="font-size:clamp(1.3rem,3.1vw,2.3rem)">pasang frame lewat webcam,</span>
+                        <span class="block text-slate-500 font-medium" style="font-size:clamp(1.05rem,2.1vw,1.5rem)">cek bentuk wajah,</span>
+                        <span class="block text-slate-500 font-medium text-base">lalu lihat bedanya tiap jenis lensa sebelum membeli.</span>
+                    </h1>
+                    <div class="flex flex-wrap items-center gap-3 mt-9 pb-12">
+                        <a href="#tryon-studio" onclick="playAudio('scan')" class="px-6 py-3 rounded-md bg-cyber-cyan hover:opacity-90 text-slate-950 font-semibold transition-opacity flex items-center gap-2">
+                            <i class="fa-solid fa-camera"></i> Buka try-on studio
+                        </a>
+                        <a href="#catalog" onclick="playAudio('click')" class="px-6 py-3 rounded-md border border-ink text-ink font-semibold hover:bg-ink hover:text-slate-950 transition-colors">
+                            Lihat koleksi frame
+                        </a>
+                    </div>
+                </div>
+                <div class="lg:col-span-4">
+                    <img src="https://images.unsplash.com/photo-1572635196237-14b3f281503f?auto=format&fit=crop&w=900&q=80" alt="Kacamata frame titanium" class="w-full aspect-[4/5] object-cover rounded-t-md bg-slate-800">
+                </div>
+            </div>
+        </div>
+        <div class="border-t border-slate-800 bg-white/60">
+            <dl class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-2 md:grid-cols-4 gap-y-4 py-5 text-sm">
+                <div><dt class="text-slate-400">Coba sebelum beli</dt><dd class="font-semibold text-ink">Virtual try-on</dd></div>
+                <div><dt class="text-slate-400">Pilihan lensa</dt><dd class="font-semibold text-ink">4 tipe</dd></div>
+                <div><dt class="text-slate-400">Konfigurasi</dt><dd class="font-semibold text-ink">Resep &amp; coating</dd></div>
+                <div><dt class="text-slate-400">Layanan</dt><dd class="font-semibold text-ink">Garansi 30 hari</dd></div>
+            </dl>
+        </div>
+    </section>
+
+    <!-- AI Virtual Try-On Experience Studio -->
+    <section id="tryon-studio" class="py-12 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row items-center justify-between mb-8 gap-4">
+                <div>
+                    <h2 class="text-3xl text-ink">Virtual try-on studio</h2>
+                    <p class="text-slate-400 text-sm mt-1">Gunakan Webcam, Upload Foto, atau Pilih Model Wajah Preset</p>
+                </div>
+                <div class="flex items-center gap-2 bg-slate-900/90 p-1.5 rounded-md border border-slate-800">
+                    <button id="mode-preset-btn" onclick="switchInputMode('preset')" class="px-4 py-2 rounded-md text-xs font-tech font-bold transition-all bg-cyber-cyan text-slate-950 shadow-md">
+                        <i class="fa-solid fa-user-group mr-1"></i> Model Preset
+                    </button>
+                    <button id="mode-upload-btn" onclick="switchInputMode('upload')" class="px-4 py-2 rounded-md text-xs font-tech font-bold transition-all text-slate-400 hover:text-ink">
+                        <i class="fa-solid fa-upload mr-1"></i> Upload Foto
+                    </button>
+                    <button id="mode-webcam-btn" onclick="switchInputMode('webcam')" class="px-4 py-2 rounded-md text-xs font-tech font-bold transition-all text-slate-400 hover:text-ink">
+                        <i class="fa-solid fa-video mr-1"></i> Live Camera
+                    </button>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                <!-- Left: Interactive Canvas Screen -->
+                <div class="lg:col-span-7 flex flex-col gap-4">
+                    <div class="relative w-full aspect-[4/3] rounded-lg cyber-glass overflow-hidden border border-cyber-cyan/30 flex items-center justify-center bg-slate-950">
+                        
+                        <!-- Video Feed (Hidden initially until active) -->
+                        <video id="webcam-video" autoplay playsinline class="absolute inset-0 w-full h-full object-cover transform -scale-x-100 hidden"></video>
+
+                        <!-- Static Model / Uploaded Image Target -->
+                        <img id="preset-image" crossorigin="anonymous" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=800&q=80" alt="Preset Model" class="absolute inset-0 w-full h-full object-cover">
+
+                        <!-- Glasses Render Overlay Canvas -->
+                        <canvas id="tryon-canvas" class="absolute inset-0 w-full h-full z-10 pointer-events-none"></canvas>
+
+                        <!-- Laser Line Effect for AI Scanner -->
+                        <div id="laser-scanner" class="laser-line"></div>
+
+                        <!-- On-Screen HUD Overlay -->
+                        <div class="absolute top-4 left-4 z-20 flex items-center gap-2">
+                            <span class="px-3 py-1 rounded-full bg-slate-950/80 backdrop-blur-md border border-cyber-cyan/40 text-[11px] font-tech text-cyber-cyan flex items-center gap-2">
+                                <span class="w-2 h-2 rounded-full bg-cyber-cyan"></span>
+                                Overlay aktif
+                            </span>
+                            <span id="fps-hud" class="px-2.5 py-1 rounded-full bg-slate-950/80 backdrop-blur-md border border-slate-800 text-[11px] font-tech text-slate-400">
+                                60 FPS
+                            </span>
+                        </div>
+
+                        <!-- Active Frame Tag HUD -->
+                        <div class="absolute bottom-4 left-4 z-20 bg-slate-950/90 backdrop-blur-md p-3 rounded-md border border-slate-800 flex items-center gap-3">
+                            <div class="w-8 h-8 rounded-lg bg-cyber-cyan/10 flex items-center justify-center border border-cyber-cyan/30">
+                                <i class="fa-solid fa-glasses text-cyber-cyan text-sm"></i>
+                            </div>
+                            <div>
+                                <p class="text-xs font-tech font-bold text-ink" id="hud-frame-name">Lumen Hexa</p>
+                                <p class="text-[10px] text-cyber-cyan font-tech" id="hud-frame-color">Hitam doff</p>
+                            </div>
+                        </div>
+
+                        <!-- Hidden File Input for Image Upload -->
+                        <input type="file" id="photo-upload-input" accept="image/*" class="hidden" onchange="handlePhotoUpload(event)">
+                    </div>
+
+                    <!-- Preset Selector Bar (Visible in preset mode) -->
+                    <div id="preset-models-bar" class="cyber-glass p-3 rounded-md flex items-center gap-3 overflow-x-auto">
+                        <span class="text-xs font-tech text-slate-400 whitespace-nowrap pl-2">Bentuk wajah:</span>
+                        <button onclick="setPresetModel('https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=800&q=80', 'Oval', this)" class="preset-thumb-btn active px-3 py-1.5 rounded-md bg-cyber-cyan/20 border border-cyber-cyan text-xs font-tech text-ink flex items-center gap-2 shrink-0 transition-colors">
+                            <span class="inline-block w-3 h-4 rounded-full border-2 border-current"></span> Oval
+                        </button>
+                        <button onclick="setPresetModel('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=800&q=80', 'Kotak', this)" class="preset-thumb-btn px-3 py-1.5 rounded-md bg-slate-900 border border-slate-800 hover:border-cyber-cyan text-xs font-tech text-slate-300 flex items-center gap-2 shrink-0 transition-colors">
+                            <span class="inline-block w-3.5 h-3.5 rounded-sm border-2 border-current"></span> Kotak
+                        </button>
+                    </div>
+                    <div id="frame-shape-bar" class="cyber-glass p-3 rounded-md flex items-center gap-3 overflow-x-auto">
+                        <span class="text-xs font-tech text-slate-400 whitespace-nowrap pl-2">Bentuk frame:</span>
+                        <button data-shape="Oval" onclick="setFrameShape('Oval', this)" class="shape-btn px-3 py-1.5 rounded-md bg-slate-900 border border-slate-800 hover:border-cyber-cyan text-xs font-tech text-slate-300 shrink-0 transition-colors">Oval</button>
+                        <button data-shape="Round" onclick="setFrameShape('Round', this)" class="shape-btn px-3 py-1.5 rounded-md bg-slate-900 border border-slate-800 hover:border-cyber-cyan text-xs font-tech text-slate-300 shrink-0 transition-colors">Bulat</button>
+                        <button data-shape="Square" onclick="setFrameShape('Square', this)" class="shape-btn px-3 py-1.5 rounded-md bg-slate-900 border border-slate-800 hover:border-cyber-cyan text-xs font-tech text-slate-300 shrink-0 transition-colors">Kotak</button>
+                        <button data-shape="Heart" onclick="setFrameShape('Heart', this)" class="shape-btn px-3 py-1.5 rounded-md bg-slate-900 border border-slate-800 hover:border-cyber-cyan text-xs font-tech text-slate-300 shrink-0 transition-colors">Hati</button>
+                        <button data-shape="Cat-Eye" onclick="setFrameShape('Cat-Eye', this)" class="shape-btn px-3 py-1.5 rounded-md bg-slate-900 border border-slate-800 hover:border-cyber-cyan text-xs font-tech text-slate-300 shrink-0 transition-colors">Cat-Eye</button>
+                        <button data-shape="Aviator" onclick="setFrameShape('Aviator', this)" class="shape-btn px-3 py-1.5 rounded-md bg-slate-900 border border-slate-800 hover:border-cyber-cyan text-xs font-tech text-slate-300 shrink-0 transition-colors">Aviator</button>
+                        <button data-shape="Hexagon" onclick="setFrameShape('Hexagon', this)" class="shape-btn px-3 py-1.5 rounded-md bg-slate-900 border border-slate-800 hover:border-cyber-cyan text-xs font-tech text-slate-300 shrink-0 transition-colors">Hexagon</button>
+                    </div>
+                </div>
+
+                <!-- Right: Precision Controls & Color Customizer -->
+                <div class="lg:col-span-5 flex flex-col gap-6">
+                    
+                    <!-- AI Diagnostic Action Trigger -->
+                    <div class="cyber-glass p-5 rounded-lg">
+                        <div class="flex items-center justify-between mb-3">
+                            <div class="flex items-center gap-2">
+                                <i class="fa-solid fa-brain text-cyber-purple text-lg"></i>
+                                <h3 class="font-tech text-lg font-bold text-ink">Cek bentuk wajah</h3>
+                            </div>
+                            <span class="text-[10px] bg-cyber-purple/30 text-cyber-purple px-2 py-0.5 rounded-md font-tech">Otomatis</span>
+                        </div>
+                        <p class="text-xs text-slate-300 mb-4">Perkiraan bentuk wajah untuk membantu memilih frame.</p>
+                        <button onclick="runAIFaceDiagnostic()" class="w-full py-3 rounded-md bg-ink text-slate-950 font-semibold text-sm hover:opacity-90 transition-opacity flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-qrcode"></i> Mulai cek wajah
+                        </button>
+
+                        <!-- Diagnostic Output Panel (Hidden initially) -->
+                        <div id="ai-diagnostic-result" class="hidden mt-4 pt-4 border-t border-slate-800">
+                            <div class="flex items-center justify-between text-xs font-tech mb-2">
+                                <span class="text-slate-400">Bentuk wajah:</span>
+                                <span id="res-face-shape" class="text-cyber-cyan font-bold">Oval, seimbang</span>
+                            </div>
+                            <div class="flex items-center justify-between text-xs font-tech mb-3">
+                                <span class="text-slate-400">Kecocokan frame:</span>
+                                <span id="res-match-score" class="text-emerald-400 font-bold">98.5% cocok</span>
+                            </div>
+                            <p id="res-description" class="text-[11px] text-slate-300 italic bg-slate-950/60 p-2.5 rounded-md border border-slate-800">
+                                Wajah Oval sangat cocok dengan frame Geometric Titanium & Round.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Precision Fitting Controls -->
+                    <div class="cyber-glass p-5 rounded-lg space-y-4">
+                        <h3 class="font-tech text-base font-bold text-ink flex items-center justify-between">
+                            <span>Atur posisi frame</span>
+                            <button onclick="resetFrameFitting()" class="text-[11px] text-cyber-cyan hover:underline font-normal">Reset Fitting</button>
+                        </h3>
+
+                        <!-- Scale Slider -->
+                        <div class="space-y-1">
+                            <div class="flex justify-between text-xs font-tech">
+                                <span class="text-slate-400">Ukuran Frame (Scale)</span>
+                                <span id="val-scale" class="text-cyber-cyan">100%</span>
+                            </div>
+                            <input type="range" id="slider-scale" min="0.6" max="1.6" step="0.02" value="1.0" oninput="updateFitting()">
+                        </div>
+
+                        <!-- Offset Y Slider -->
+                        <div class="space-y-1">
+                            <div class="flex justify-between text-xs font-tech">
+                                <span class="text-slate-400">Posisi Vertikal (Y)</span>
+                                <span id="val-offset-y" class="text-cyber-cyan">0px</span>
+                            </div>
+                            <input type="range" id="slider-offset-y" min="-150" max="150" step="1" value="0" oninput="updateFitting()">
+                        </div>
+
+                        <!-- Offset X Slider -->
+                        <div class="space-y-1">
+                            <div class="flex justify-between text-xs font-tech">
+                                <span class="text-slate-400">Posisi Horisontal (X)</span>
+                                <span id="val-offset-x" class="text-cyber-cyan">0px</span>
+                            </div>
+                            <input type="range" id="slider-offset-x" min="-100" max="100" step="1" value="0" oninput="updateFitting()">
+                        </div>
+
+                        <!-- Rotation Slider -->
+                        <div class="space-y-1">
+                            <div class="flex justify-between text-xs font-tech">
+                                <span class="text-slate-400">Kemiringan (Rotation)</span>
+                                <span id="val-rotation" class="text-cyber-cyan">0°</span>
+                            </div>
+                            <input type="range" id="slider-rotation" min="-25" max="25" step="0.5" value="0" oninput="updateFitting()">
+                        </div>
+
+                        <!-- IPD Slider -->
+                        <div class="space-y-1">
+                            <div class="flex justify-between text-xs font-tech">
+                                <span class="text-slate-400">Jarak Pupil (IPD Bridge)</span>
+                                <span id="val-ipd" class="text-cyber-cyan">64 mm</span>
+                            </div>
+                            <input type="range" id="slider-ipd" min="54" max="74" step="0.5" value="64" oninput="updateFitting()">
+                        </div>
+                    </div>
+
+                    <!-- Real-time Color Swatches -->
+                    <div class="cyber-glass p-5 rounded-lg">
+                        <h3 class="font-tech text-xs font-bold text-slate-400 mb-3">Warna frame</h3>
+                        <div class="grid grid-cols-6 gap-2">
+                            <button onclick="setFrameColor('#18181b', 'Hitam doff')" class="w-full aspect-square rounded-md bg-zinc-900 border-2 border-cyber-cyan shadow-md flex items-center justify-center hover:scale-110 transition-transform" title="Hitam doff"></button>
+                            <button onclick="setFrameColor('#eab308', 'Metallic Gold')" class="w-full aspect-square rounded-md bg-amber-500 border-2 border-transparent hover:border-white shadow-md flex items-center justify-center hover:scale-110 transition-transform" title="Metallic Gold"></button>
+                            <button onclick="setFrameColor('#2447e0', 'Cobalt')" class="w-full aspect-square rounded-md bg-blue-700 border-2 border-transparent hover:border-white shadow-md flex items-center justify-center hover:scale-110 transition-transform" title="Cobalt"></button>
+                            <button onclick="setFrameColor('#fb7185', 'Rose Gold Titanium')" class="w-full aspect-square rounded-md bg-rose-400 border-2 border-transparent hover:border-white shadow-md flex items-center justify-center hover:scale-110 transition-transform" title="Rose Gold"></button>
+                            <button onclick="setFrameColor('rgba(255,255,255,0.6)', 'Bening')" class="w-full aspect-square rounded-md bg-white border-2 border-transparent hover:border-white shadow-md flex items-center justify-center hover:scale-110 transition-transform" title="Bening"></button>
+                            <button onclick="setFrameColor('#78350f', 'Tortoise Shell Amber')" class="w-full aspect-square rounded-md bg-amber-900 border-2 border-transparent hover:border-white shadow-md flex items-center justify-center hover:scale-110 transition-transform" title="Tortoise Amber"></button>
+                        </div>
+                    </div>
+
+                    <!-- Snapshot & Compare Control -->
+                    <div class="flex gap-3">
+                        <button onclick="takeSnapshot()" class="flex-1 py-3.5 rounded-md bg-slate-900 border border-cyber-cyan/40 hover:bg-cyber-cyan/20 text-cyber-cyan font-tech font-bold text-sm transition-all flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-camera-retro text-base"></i> Ambil Snapshot
+                        </button>
+                        <button onclick="openLensCrafterModalCurrent()" class="flex-1 py-3.5 rounded-md bg-cyber-cyan text-slate-950 font-tech font-bold text-sm hover:opacity-90 transition-all flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-cart-plus text-base"></i> Pilih Resep Lensa
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Vision Simulator Section -->
+    <section id="vision-simulator" class="py-16 relative bg-[#e4e7e1] border-y border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="max-w-5xl mx-auto mb-8">
+                <h2 class="text-3xl font-semibold font-tech text-ink mt-3">Lihat bedanya lewat lensa</h2>
+                <p class="text-slate-400 text-sm mt-2">Coba tiap jenis lensa secara visual sebelum membeli.</p>
+            </div>
+
+            <!-- Simulator Container -->
+            <div class="cyber-glass p-6 rounded-lg max-w-5xl mx-auto border-cyber-cyan/30">
+                <!-- Lens Type Filter Tabs -->
+                <div class="flex flex-wrap items-center justify-center gap-3 mb-6">
+                    <button onclick="setVisionMode('blueshield')" id="vtab-blueshield" class="vision-tab active px-5 py-2.5 rounded-md text-xs font-tech font-bold border transition-all bg-cyber-cyan text-slate-950 border-cyber-cyan">
+                        <i class="fa-solid fa-laptop text-sm mr-2"></i>BlueShield Digital Filter
+                    </button>
+                    <button onclick="setVisionMode('photochromic')" id="vtab-photochromic" class="vision-tab px-5 py-2.5 rounded-md text-xs font-tech font-bold border border-slate-800 text-slate-400 hover:text-ink transition-all">
+                        <i class="fa-solid fa-sun text-sm mr-2"></i>PhotoChromic Smart
+                    </button>
+                    <button onclick="setVisionMode('polarized')" id="vtab-polarized" class="vision-tab px-5 py-2.5 rounded-md text-xs font-tech font-bold border border-slate-800 text-slate-400 hover:text-ink transition-all">
+                        <i class="fa-solid fa-water text-sm mr-2"></i>Polarized Ultra-HD
+                    </button>
+                    <button onclick="setVisionMode('nightdrive')" id="vtab-nightdrive" class="vision-tab px-5 py-2.5 rounded-md text-xs font-tech font-bold border border-slate-800 text-slate-400 hover:text-ink transition-all">
+                        <i class="fa-solid fa-car text-sm mr-2"></i>NightDrive Anti-Glare
+                    </button>
+                </div>
+
+                <!-- Simulation Viewport -->
+                <div class="relative aspect-video rounded-md overflow-hidden border border-slate-800 bg-slate-900">
+                    <!-- Background Scene -->
+                    <div id="vision-scene" class="absolute inset-0"></div>
+                    <div id="vision-scene-lens" class="absolute inset-0 transition-[filter] duration-300" style="clip-path: inset(12.5% round 40px)"></div>
+
+                    <!-- Simulated Lens Overlay Filter Layer -->
+                    <div id="vision-lens-overlay" class="absolute inset-0 pointer-events-none transition-all duration-300 flex items-center justify-center">
+                        <!-- Simulated Lens Frame Outline -->
+                        <div class="w-3/4 h-3/4 border-2 border-white/80 rounded-[40px] backdrop-blur-[0.5px] transition-all flex items-center justify-center">
+                            <span class="bg-slate-950/80 px-4 py-2 rounded-full border border-cyber-cyan/40 text-cyber-cyan text-xs font-tech font-bold shadow-lg" id="vision-lens-badge">
+                                Lensa BlueShield Aktif
+                            </span>
+                        </div>
+                    </div>
+
+                    </div>
+
+                <!-- Interactive Slider & Explanation Footer -->
+                <div class="mt-6 flex flex-col md:flex-row items-center justify-between gap-4 bg-slate-950/60 p-4 rounded-md border border-slate-800">
+                    <div class="flex-1 space-y-1">
+                        <p class="text-xs font-tech font-bold text-ink" id="vision-title">BlueShield: filter layar digital</p>
+                        <p class="text-xs text-slate-400" id="vision-desc">Mengeliminasi 99% sinar biru berbahaya dari layar gadget & monitor untuk mencegah mata lelah.</p>
+                    </div>
+
+                    <!-- Contextual Interactive Slider (For Photochromic UV or NightDrive intensity) -->
+                    <div id="vision-slider-box" class="w-full md:w-64 space-y-1">
+                        <div class="flex justify-between text-[11px] font-tech text-slate-400">
+                            <span>Intensitas Sinar UV / Glare</span>
+                            <span id="vision-slider-val" class="text-cyber-cyan">50%</span>
+                        </div>
+                        <input type="range" id="vision-intensity-slider" min="0" max="100" value="50" oninput="updateVisionIntensity(this.value)" class="w-full">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- E-Commerce Product Catalog Section -->
+    <section id="catalog" class="py-16 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="catalog-toolbar flex flex-col md:flex-row items-start md:items-end justify-between mb-8 gap-5">
+                <div>
+                    <p class="lo-section-kicker">Pilih frame</p>
+                    <h2 class="text-3xl sm:text-4xl font-semibold font-tech text-ink mt-2">Koleksi frame 2026</h2>
+                    <p class="text-sm text-slate-400 mt-2 max-w-xl">Frame pilihan untuk dipadukan dengan resep dan karakter lensa yang sesuai kebutuhan Anda.</p>
+                </div>
+
+                <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 w-full md:w-auto">
+                    <label class="sr-only" for="filter-shape">Bentuk frame</label>
+                    <select id="filter-shape" onchange="applyCatalogFilters()" class="lo-filter px-4 py-2.5 rounded-md text-xs font-tech font-semibold focus:border-cyber-cyan outline-none">
+                        <option value="all">Semua bentuk</option>
+                        <option value="Square">Square</option>
+                        <option value="Round">Round</option>
+                        <option value="Cat-Eye">Cat-Eye</option>
+                        <option value="Aviator">Aviator</option>
+                        <option value="Geometric">Geometric</option>
+                    </select>
+                    <label class="sr-only" for="filter-material">Material</label>
+                    <select id="filter-material" onchange="applyCatalogFilters()" class="lo-filter px-4 py-2.5 rounded-md text-xs font-tech font-semibold focus:border-cyber-cyan outline-none">
+                        <option value="all">Semua material</option>
+                        <option value="Titanium">Titanium</option>
+                        <option value="Acetate">Acetate</option>
+                        <option value="Carbon Fiber">Carbon Fiber</option>
+                    </select>
+                    <label class="sr-only" for="sort-catalog">Urutkan katalog</label>
+                    <select id="sort-catalog" onchange="applyCatalogFilters()" class="lo-filter px-4 py-2.5 rounded-md text-xs font-tech font-semibold focus:border-cyber-cyan outline-none">
+                        <option value="featured">Unggulan</option>
+                        <option value="price-low">Harga terendah</option>
+                        <option value="price-high">Harga tertinggi</option>
+                        <option value="rating">Rating tertinggi</option>
+                    </select>
+                </div>
+            </div>
+            <div class="flex items-center justify-between mb-5 text-xs">
+                <p id="catalog-result-count" class="text-slate-400 font-tech">6 frame tersedia</p>
+                <button onclick="resetCatalogFilters()" class="text-slate-500 hover:text-cyber-cyan font-tech font-semibold transition-colors">Reset filter</button>
+            </div>
+
+            <!-- Product Grid -->
+            <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-6">
+                <!-- Products dynamically rendered here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal: Lens Crafter Prescription Configurator -->
+    <div id="lens-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 hidden">
+        <div class="cyber-glass-glow max-w-2xl w-full max-h-[90vh] overflow-y-auto rounded-lg p-6 sm:p-8 relative border-cyber-cyan">
+            <!-- Close Button -->
+            <button onclick="closeLensCrafterModal()" class="absolute top-6 right-6 w-9 h-9 rounded-full bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-ink transition-colors">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <div class="mb-6">
+                <span class="text-cyber-cyan text-xs font-tech">Konfigurator lensa</span>
+                <h3 class="text-2xl font-bold font-tech text-ink mt-1" id="modal-frame-title">Konfigurasi Lensa Kustom</h3>
+                <p class="text-xs text-slate-400">Sesuaikan jenis lensa, resep mata, dan pelapis pelindung.</p>
+            </div>
+
+            <!-- Configuration Steps -->
+            <div class="space-y-6">
+                <div>
+                    <label class="block text-xs font-tech font-bold text-slate-300 mb-3">Warna frame: <span id="cfg-color-name" class="font-normal text-slate-400"></span></label>
+                    <div id="cfg-colors" class="flex flex-wrap gap-3"></div>
+                </div>
+
+                <!-- Step 1: Lens Type Selector -->
+                <div>
+                    <label class="block text-xs font-tech font-bold text-slate-300 mb-3">1. Pilih Jenis Lensa</label>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <label class="cyber-glass p-3.5 rounded-md border-slate-800 cursor-pointer hover:border-cyber-cyan transition-all flex items-start gap-3">
+                            <input type="radio" name="lens-type" value="non-prescription" checked onchange="onLensTypeChange()" class="mt-1 accent-cyber-cyan">
+                            <div>
+                                <p class="text-xs font-tech font-bold text-ink">Fashion / Non-Prescription</p>
+                                <p class="text-[11px] text-slate-400">Lensa netral anti-UV + Rp 0</p>
+                            </div>
+                        </label>
+
+                        <label class="cyber-glass p-3.5 rounded-md border-slate-800 cursor-pointer hover:border-cyber-cyan transition-all flex items-start gap-3">
+                            <input type="radio" name="lens-type" value="single-vision" onchange="onLensTypeChange()" class="mt-1 accent-cyber-cyan">
+                            <div>
+                                <p class="text-xs font-tech font-bold text-ink">Single Vision (Minus/Plus)</p>
+                                <p class="text-[11px] text-slate-400">Untuk jarak jauh/dekat + Rp 350.000</p>
+                            </div>
+                        </label>
+
+                        <label class="cyber-glass p-3.5 rounded-md border-slate-800 cursor-pointer hover:border-cyber-cyan transition-all flex items-start gap-3">
+                            <input type="radio" name="lens-type" value="blue-shield" onchange="onLensTypeChange()" class="mt-1 accent-cyber-cyan">
+                            <div>
+                                <p class="text-xs font-tech font-bold text-ink">BlueShield Gaming / Computer</p>
+                                <p class="text-[11px] text-slate-400">Anti sinar biru digital + Rp 450.000</p>
+                            </div>
+                        </label>
+
+                        <label class="cyber-glass p-3.5 rounded-md border-slate-800 cursor-pointer hover:border-cyber-cyan transition-all flex items-start gap-3">
+                            <input type="radio" name="lens-type" value="progressive" onchange="onLensTypeChange()" class="mt-1 accent-cyber-cyan">
+                            <div>
+                                <p class="text-xs font-tech font-bold text-ink">Progressive Smart HD</p>
+                                <p class="text-[11px] text-slate-400">Tanpa garis sekat + Rp 750.000</p>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Step 2: Prescription Form (Sph, Cyl, Axis, PD) -->
+                <div id="prescription-form-block" class="cyber-glass p-4 rounded-md border-slate-800 space-y-4 hidden">
+                    <label class="block text-xs font-tech font-bold text-slate-300">2. Resep kacamata</label>
+
+                    <div class="grid gap-2">
+                        <label class="lo-opt"><input type="radio" name="rx-mode" value="fill" checked onchange="onRxModeChange()"><span class="flex-1"><b class="block text-ink">Isi sekarang</b><span class="text-slate-400">Salin angka dari kertas resep Anda.</span></span></label>
+                        <label class="lo-opt"><input type="radio" name="rx-mode" value="later" onchange="onRxModeChange()"><span class="flex-1"><b class="block text-ink">Kirim foto resep lewat WhatsApp</b><span class="text-slate-400">Setelah checkout. Lensa mulai dibuat setelah resep kami terima.</span></span></label>
+                        <label class="lo-opt hidden" id="rx-plano-opt"><input type="radio" name="rx-mode" value="plano" onchange="onRxModeChange()"><span class="flex-1"><b class="block text-ink">Tanpa resep (lensa plano)</b><span class="text-slate-400">Hanya filter sinar biru, tanpa koreksi minus atau plus.</span></span></label>
+                    </div>
+
+                    <div id="rx-fields" class="space-y-3">
+                        <div class="flex items-center justify-between">
+                            <p class="text-[11px] text-slate-400">Isi sesuai resep. SPH dan CYL kelipatan 0.25.</p>
+                            <button type="button" onclick="clearRxFields()" class="text-[11px] text-cyber-cyan font-tech hover:underline">Kosongkan</button>
+                        </div>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <div class="bg-slate-950/60 p-3 rounded-md border border-slate-800">
+                            <p class="text-[11px] font-tech font-bold text-ink mb-2">Mata kanan (OD)</p>
+                            <div class="grid grid-cols-3 gap-2">
+                                <div><label class="lo-label" for="rx-od-sph">SPH</label><input id="rx-od-sph" type="text" inputmode="decimal" placeholder="-1.50" autocomplete="off" class="lo-input rx-in"></div>
+                                <div><label class="lo-label" for="rx-od-cyl">CYL</label><input id="rx-od-cyl" type="text" inputmode="decimal" placeholder="-0.50" autocomplete="off" class="lo-input rx-in"></div>
+                                <div><label class="lo-label" for="rx-od-axis">AXIS</label><input id="rx-od-axis" type="text" inputmode="numeric" maxlength="3" placeholder="180" autocomplete="off" class="lo-input rx-in"></div>
+                                <div class="rx-add-cell hidden"><label class="lo-label" for="rx-od-add">ADD</label><input id="rx-od-add" type="text" inputmode="decimal" placeholder="+2.00" autocomplete="off" class="lo-input rx-in"></div>
+                                <div><label class="lo-label" for="rx-od-pd">PD (mm)</label><input id="rx-od-pd" type="text" inputmode="decimal" placeholder="32" autocomplete="off" class="lo-input rx-in"></div>
+                            </div>
+                        </div>
+                        <div class="bg-slate-950/60 p-3 rounded-md border border-slate-800">
+                            <p class="text-[11px] font-tech font-bold text-ink mb-2">Mata kiri (OS)</p>
+                            <div class="grid grid-cols-3 gap-2">
+                                <div><label class="lo-label" for="rx-os-sph">SPH</label><input id="rx-os-sph" type="text" inputmode="decimal" placeholder="-1.50" autocomplete="off" class="lo-input rx-in"></div>
+                                <div><label class="lo-label" for="rx-os-cyl">CYL</label><input id="rx-os-cyl" type="text" inputmode="decimal" placeholder="-0.50" autocomplete="off" class="lo-input rx-in"></div>
+                                <div><label class="lo-label" for="rx-os-axis">AXIS</label><input id="rx-os-axis" type="text" inputmode="numeric" maxlength="3" placeholder="180" autocomplete="off" class="lo-input rx-in"></div>
+                                <div class="rx-add-cell hidden"><label class="lo-label" for="rx-os-add">ADD</label><input id="rx-os-add" type="text" inputmode="decimal" placeholder="+2.00" autocomplete="off" class="lo-input rx-in"></div>
+                                <div><label class="lo-label" for="rx-os-pd">PD (mm)</label><input id="rx-os-pd" type="text" inputmode="decimal" placeholder="32" autocomplete="off" class="lo-input rx-in"></div>
+                            </div>
+                        </div>
+                        </div>
+                        <p class="text-[11px] text-slate-400">AXIS wajib diisi bila CYL tidak 0. PD kanan dan kiri biasanya 28 sampai 36 mm. Kalau hanya tahu PD total, bagi dua.</p>
+                    </div>
+
+                    <p id="rx-later-note" class="hidden text-[11px] bg-amber-50 border border-amber-200 text-amber-800 rounded-md px-3 py-2">Pesanan tetap bisa dibayar sekarang. Kami akan memproses lensa begitu foto resep Anda masuk lewat WhatsApp.</p>
+
+                    <p id="rx-err" class="lo-err" role="alert"></p>
+                </div>
+
+                <!-- Step 3: Coating Options -->
+                <div>
+                    <label class="block text-xs font-tech font-bold text-slate-300 mb-3">3. Lapisan & Fitur Pelindung</label>
+                    <div class="grid grid-cols-3 gap-2">
+                        <label class="cyber-glass p-2.5 rounded-md border-slate-800 cursor-pointer text-center flex flex-col items-center gap-1 hover:border-cyber-cyan">
+                            <input type="checkbox" id="coat-anti-reflective" checked onchange="updateLensPrice()" class="accent-cyber-cyan">
+                            <span class="text-[11px] font-tech text-ink">Anti-Reflective</span>
+                            <span class="text-[9px] text-slate-400">+ Rp 100.000</span>
+                        </label>
+                        <label class="cyber-glass p-2.5 rounded-md border-slate-800 cursor-pointer text-center flex flex-col items-center gap-1 hover:border-cyber-cyan">
+                            <input type="checkbox" id="coat-hydrophobic" onchange="updateLensPrice()" class="accent-cyber-cyan">
+                            <span class="text-[11px] font-tech text-ink">Hydrophobic (Air)</span>
+                            <span class="text-[9px] text-slate-400">+ Rp 150.000</span>
+                        </label>
+                        <label class="cyber-glass p-2.5 rounded-md border-slate-800 cursor-pointer text-center flex flex-col items-center gap-1 hover:border-cyber-cyan">
+                            <input type="checkbox" id="coat-anti-scratch" checked onchange="updateLensPrice()" class="accent-cyber-cyan">
+                            <span class="text-[11px] font-tech text-ink">Scratch-Shield</span>
+                            <span class="text-[9px] text-slate-400">+ Rp 80.000</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Price Summary Footer -->
+                <div class="pt-4 border-t border-slate-800 flex items-center justify-between">
+                    <div>
+                        <p class="text-xs text-slate-400 font-tech">Total frame + lensa</p>
+                        <p class="text-2xl font-bold font-tech text-cyber-cyan" id="modal-total-price">Rp 1.850.000</p>
+                    </div>
+                    <button id="lens-submit-btn" onclick="addConfiguredToCart()" class="px-6 py-3 rounded-md bg-cyber-cyan hover:opacity-90 text-slate-950 font-tech font-bold text-sm transition-all">
+                        <i class="fa-solid fa-cart-shopping mr-2"></i> Tambah Ke Keranjang
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Drawer: Cart & Checkout -->
+    <div id="cart-drawer" class="fixed inset-y-0 right-0 z-50 w-full max-w-md cyber-glass-glow border-l border-cyber-cyan/30 transform translate-x-full transition-transform duration-300 ease-in-out flex flex-col">
+        <!-- Cart Header -->
+        <div class="p-6 border-b border-slate-800 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <i class="fa-solid fa-bag-shopping text-cyber-cyan text-xl"></i>
+                <h3 class="font-tech text-xl font-bold text-ink">Keranjang Belanja</h3>
+            </div>
+            <button onclick="toggleCartDrawer()" class="text-slate-400 hover:text-ink">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+        </div>
+
+        <!-- Cart Items List -->
+        <div id="cart-items-container" class="flex-1 p-6 space-y-4 overflow-y-auto">
+            <!-- Rendered cart items -->
+        </div>
+
+        <!-- Cart Footer -->
+        <div class="p-6 border-t border-slate-800 bg-slate-950/90 space-y-4">
+            <!-- Voucher input -->
+            <div class="flex gap-2">
+                <input type="text" id="voucher-code" placeholder="Kode Promo (misal: LUMEN2026)" class="flex-1 bg-slate-900 border border-slate-800 rounded-md px-3 py-2 text-xs font-tech text-ink focus:border-cyber-cyan outline-none uppercase">
+                <button onclick="applyVoucher()" class="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-cyber-cyan rounded-md text-xs font-tech font-bold">Gunakan</button>
+            </div>
+
+            <p id="voucher-msg" class="text-[11px] min-h-[16px]" role="status"></p>
+
+            <!-- Price Breakdown -->
+            <div class="space-y-1.5 text-xs font-tech">
+                <div class="flex justify-between text-slate-400">
+                    <span>Subtotal:</span>
+                    <span id="cart-subtotal">Rp 0</span>
+                </div>
+                <div class="flex justify-between text-emerald-400">
+                    <span>Diskon Voucher:</span>
+                    <span id="cart-discount">- Rp 0</span>
+                </div>
+                <div class="flex justify-between text-base font-bold text-ink pt-2 border-t border-slate-800">
+                    <span>Total</span>
+                    <span id="cart-final-total" class="text-cyber-cyan">Rp 0</span>
+                </div>
+            </div>
+
+            <!-- Checkout Action Button -->
+            <button onclick="openCheckoutModal()" class="w-full py-3.5 rounded-md bg-cyber-cyan hover:opacity-90 text-slate-950 font-tech font-bold text-sm transition-all">
+                Lanjut ke checkout
+            </button>
+        </div>
+    </div>
+
+    <!-- Modal: Snapshot Comparison -->
+    <div id="snapshot-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 hidden">
+        <div class="cyber-glass-glow max-w-4xl w-full max-h-[90vh] overflow-y-auto rounded-lg p-6 relative border-cyber-purple">
+            <button onclick="closeSnapshotModal()" class="absolute top-6 right-6 w-9 h-9 rounded-full bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-ink">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <div class="mb-6">
+                <span class="text-cyber-purple text-xs font-tech">Bandingkan snapshot</span>
+                <h3 class="text-2xl font-bold font-tech text-ink mt-1">Perbandingan Snapshot Hasil Try-On</h3>
+                <p class="text-xs text-slate-400">Bandingkan tampilan beberapa kacamata pada wajah Anda sekaligus.</p>
+            </div>
+
+            <div id="snapshots-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <!-- Snapshots rendered here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Login / Daftar -->
+    <div id="auth-modal" class="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-black/40 hidden" role="dialog" aria-modal="true" aria-labelledby="auth-title">
+        <div class="cyber-glass-glow max-w-md w-full rounded-lg p-6 sm:p-7 relative max-h-[92vh] overflow-y-auto">
+            <button onclick="closeAuthModal()" class="absolute top-4 right-4 w-9 h-9 rounded-full border border-slate-800 flex items-center justify-center text-slate-400 hover:text-ink" aria-label="Tutup"><i class="fa-solid fa-xmark"></i></button>
+            <p class="lo-section-kicker">Akun Lumen</p>
+            <h3 id="auth-title" class="text-2xl font-semibold font-tech text-ink mt-1">Masuk atau daftar</h3>
+            <p id="auth-note" class="hidden mt-3 text-xs bg-[#f3f5ff] border border-cyber-cyan/30 text-cyber-cyan rounded-md px-3 py-2"><i class="fa-solid fa-lock mr-1"></i> <span id="auth-note-text">Masuk dulu untuk melanjutkan checkout. Keranjang Anda tetap tersimpan.</span></p>
+            <div class="flex mt-5 border-b border-slate-800" role="tablist">
+                <button id="tab-login" role="tab" class="lo-tab" onclick="switchAuthTab('login')">Masuk</button>
+                <button id="tab-register" role="tab" class="lo-tab" onclick="switchAuthTab('register')">Daftar</button>
+            </div>
+            <div class="mt-5 space-y-3">
+                <div id="field-name" class="hidden"><label class="lo-label" for="auth-name">Nama lengkap</label><input id="auth-name" class="lo-input" autocomplete="name" placeholder="Nama sesuai identitas"></div>
+                <div><label class="lo-label" for="auth-email">Email</label><input id="auth-email" type="email" class="lo-input" autocomplete="email" placeholder="nama@email.com"></div>
+                <div><label class="lo-label" for="auth-pass">Kata sandi</label><input id="auth-pass" type="password" class="lo-input" autocomplete="current-password" placeholder="Minimal 6 karakter"></div>
+                <p id="auth-err" class="lo-err" role="alert"></p>
+                <button id="auth-submit" onclick="submitAuth()" class="w-full py-3 rounded-md bg-ink text-white text-sm font-tech font-bold hover:bg-cyber-cyan transition-colors">Masuk</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Form Checkout -->
+    <div id="checkout-form-modal" class="fixed inset-0 z-[55] flex items-center justify-center p-4 bg-black/40 hidden" role="dialog" aria-modal="true" aria-labelledby="co-title">
+        <div class="cyber-glass-glow max-w-5xl w-full max-h-[94vh] overflow-y-auto rounded-lg p-5 sm:p-7 relative">
+            <button onclick="closeCheckoutForm()" class="absolute top-4 right-4 w-9 h-9 rounded-full border border-slate-800 flex items-center justify-center text-slate-400 hover:text-ink" aria-label="Tutup"><i class="fa-solid fa-xmark"></i></button>
+            <p class="lo-section-kicker">Checkout</p>
+            <h3 id="co-title" class="text-2xl sm:text-3xl font-semibold font-tech text-ink mt-1 mb-6">Alamat, pengiriman, dan pembayaran</h3>
+            <div class="grid lg:grid-cols-5 gap-7">
+                <div class="lg:col-span-3 space-y-7">
+                    <section>
+                        <h4 class="font-tech font-bold text-ink mb-3">1. Alamat pengiriman</h4>
+                        <div class="grid sm:grid-cols-2 gap-3">
+                            <div><label class="lo-label" for="co-name">Nama penerima</label><input id="co-name" class="lo-input" autocomplete="name"></div>
+                            <div><label class="lo-label" for="co-phone">Nomor HP</label><input id="co-phone" class="lo-input" inputmode="tel" autocomplete="tel" placeholder="08xxxxxxxxxx"></div>
+                            <div class="sm:col-span-2"><label class="lo-label" for="co-address">Alamat lengkap</label><textarea id="co-address" rows="2" class="lo-input" autocomplete="street-address" placeholder="Nama jalan, nomor rumah, RT/RW, kelurahan, kecamatan"></textarea></div>
+                            <div><label class="lo-label" for="co-city">Kota / Kabupaten</label><input id="co-city" class="lo-input" autocomplete="address-level2"></div>
+                            <div><label class="lo-label" for="co-province">Provinsi</label>
+                                <select id="co-province" class="lo-input" autocomplete="address-level1"><option value="">Pilih provinsi</option><option>Aceh</option><option>Sumatera Utara</option><option>Sumatera Barat</option><option>Riau</option><option>Kepulauan Riau</option><option>Jambi</option><option>Sumatera Selatan</option><option>Bangka Belitung</option><option>Bengkulu</option><option>Lampung</option><option>Banten</option><option>DKI Jakarta</option><option>Jawa Barat</option><option>Jawa Tengah</option><option>DI Yogyakarta</option><option>Jawa Timur</option><option>Bali</option><option>Nusa Tenggara Barat</option><option>Nusa Tenggara Timur</option><option>Kalimantan Barat</option><option>Kalimantan Tengah</option><option>Kalimantan Selatan</option><option>Kalimantan Timur</option><option>Kalimantan Utara</option><option>Sulawesi Utara</option><option>Sulawesi Tengah</option><option>Sulawesi Selatan</option><option>Sulawesi Tenggara</option><option>Gorontalo</option><option>Sulawesi Barat</option><option>Maluku</option><option>Maluku Utara</option><option>Papua</option><option>Papua Barat</option></select></div>
+                            <div><label class="lo-label" for="co-zip">Kode pos</label><input id="co-zip" class="lo-input" inputmode="numeric" maxlength="5" autocomplete="postal-code" placeholder="5 digit"></div>
+                            <div><label class="lo-label" for="co-note">Catatan untuk kurir (opsional)</label><input id="co-note" class="lo-input" placeholder="Misal: titip ke satpam"></div>
+                        </div>
+                    </section>
+                    <section>
+                        <h4 class="font-tech font-bold text-ink mb-3">2. Metode pengiriman</h4>
+                        <div id="co-shipping" class="grid gap-2"></div>
+                    </section>
+                    <section>
+                        <h4 class="font-tech font-bold text-ink mb-3">3. Metode pembayaran</h4>
+                        <div id="co-payment" class="grid gap-2"></div>
+                        <div id="co-pay-sub" class="mt-3"></div>
+                    </section>
+                </div>
+                <aside class="lg:col-span-2">
+                    <div class="lg:sticky lg:top-0 bg-slate-950 border border-slate-800 rounded-lg p-5">
+                        <h4 class="font-tech font-bold text-ink mb-3">Ringkasan pesanan</h4>
+                        <div id="co-items" class="space-y-3 max-h-56 overflow-y-auto pr-1"></div>
+                        <dl class="mt-4 pt-4 border-t border-slate-800 space-y-1.5 text-xs font-tech">
+                            <div class="flex justify-between text-slate-400"><dt>Subtotal</dt><dd id="co-sub">Rp 0</dd></div>
+                            <div class="flex justify-between text-emerald-700"><dt>Diskon voucher</dt><dd id="co-disc">- Rp 0</dd></div>
+                            <div class="flex justify-between text-slate-400"><dt>Ongkos kirim</dt><dd id="co-ship">Rp 0</dd></div>
+                            <div class="flex justify-between text-base font-bold text-ink pt-2 border-t border-slate-800"><dt>Total bayar</dt><dd id="co-total" class="text-cyber-cyan">Rp 0</dd></div>
+                        </dl>
+                        <p id="co-err" class="lo-err mt-3" role="alert"></p>
+                        <button onclick="submitCheckout()" class="mt-2 w-full py-3.5 rounded-md bg-cyber-cyan text-slate-950 font-tech font-bold text-sm hover:opacity-90 transition-opacity"><i class="fa-solid fa-lock mr-1.5 text-xs"></i> Bayar sekarang</button>
+                        <p class="text-[11px] text-slate-400 mt-3 text-center">Pembayaran bersifat simulasi, tidak ada transaksi nyata.</p>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Konfirmasi pesanan -->
+    <div id="order-confirm-modal" class="fixed inset-0 z-[65] flex items-center justify-center p-4 bg-black/40 hidden" role="dialog" aria-modal="true" aria-labelledby="oc-title">
+        <div class="cyber-glass max-w-lg w-full max-h-[94vh] overflow-y-auto rounded-lg p-6 sm:p-8 relative">
+            <div class="text-center mb-5">
+                <div class="w-14 h-14 rounded-full bg-emerald-500/20 border border-emerald-500 text-emerald-600 flex items-center justify-center mx-auto text-2xl mb-3">
+                    <i class="fa-solid fa-circle-check"></i>
+                </div>
+                <h3 id="oc-title" class="text-2xl font-bold font-tech text-ink">Pesanan dibuat</h3>
+                <p class="text-xs text-slate-400 mt-1">Nomor pesanan: <span id="oc-id" class="text-cyber-cyan font-mono font-bold"></span></p>
+            </div>
+            <div id="oc-body" class="space-y-4"></div>
+            <div id="oc-actions" class="mt-6 grid gap-2"></div>
+        </div>
+    </div>
+
+    <!-- Modal: Pesanan saya -->
+    <div id="orders-modal" class="fixed inset-0 z-[62] flex items-center justify-center p-4 bg-black/40 hidden" role="dialog" aria-modal="true" aria-labelledby="orders-title">
+        <div class="cyber-glass-glow max-w-2xl w-full max-h-[90vh] overflow-y-auto rounded-lg p-6 sm:p-8 relative">
+            <button onclick="closeOrdersModal()" class="absolute top-4 right-4 w-9 h-9 rounded-full border border-slate-800 flex items-center justify-center text-slate-400 hover:text-ink" aria-label="Tutup"><i class="fa-solid fa-xmark"></i></button>
+            <h3 id="orders-title" class="text-2xl font-semibold font-tech text-ink">Pesanan saya</h3>
+            <p class="mt-2 text-[11px] text-slate-400">Mode demo: pembayaran dan perubahan status disimulasikan dan disimpan di perangkat ini.</p>
+            <div id="orders-list" class="space-y-3 mt-5"></div>
+        </div>
+    </div>
+
+    <div id="lo-toast" role="status" aria-live="polite"></div>
+
+    <!-- JavaScript Application Core -->
+    <script>
+        // ==========================================
+        // WEB AUDIO API SYNTHESIZER (Sci-Fi Audio SFX)
+        // ==========================================
+        let audioCtx = null;
+        let sfxEnabled = true;
+
+        function initAudio() {
+            if (!audioCtx) {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            }
+        }
+
+        // Efek suara tidak boleh membuat fitur lain gagal bila audio diblokir peramban.
+        function playAudio(type) { try { playAudioRaw(type); } catch (e) {} }
+        function playAudioRaw(type) {
+            if (!sfxEnabled) return;
+            initAudio();
+            if (audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
+
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+
+            const now = audioCtx.currentTime;
+
+            if (type === 'click') {
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(800, now);
+                osc.frequency.exponentialRampToValueAtTime(400, now + 0.05);
+                gain.gain.setValueAtTime(0.15, now);
+                gain.gain.exponentialRampToValueAtTime(0.01, now + 0.05);
+                osc.start(now);
+                osc.stop(now + 0.05);
+            } else if (type === 'scan') {
+                osc.type = 'sawtooth';
+                osc.frequency.setValueAtTime(300, now);
+                osc.frequency.exponentialRampToValueAtTime(1200, now + 0.3);
+                gain.gain.setValueAtTime(0.1, now);
+                gain.gain.exponentialRampToValueAtTime(0.01, now + 0.3);
+                osc.start(now);
+                osc.stop(now + 0.3);
+            } else if (type === 'shutter') {
+                osc.type = 'triangle';
+                osc.frequency.setValueAtTime(1200, now);
+                osc.frequency.exponentialRampToValueAtTime(200, now + 0.1);
+                gain.gain.setValueAtTime(0.2, now);
+                gain.gain.exponentialRampToValueAtTime(0.01, now + 0.1);
+                osc.start(now);
+                osc.stop(now + 0.1);
+            } else if (type === 'success') {
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(523.25, now); // C5
+                osc.frequency.setValueAtTime(659.25, now + 0.08); // E5
+                osc.frequency.setValueAtTime(783.99, now + 0.16); // G5
+                gain.gain.setValueAtTime(0.15, now);
+                gain.gain.exponentialRampToValueAtTime(0.01, now + 0.35);
+                osc.start(now);
+                osc.stop(now + 0.35);
+            }
+        }
+
+        function toggleSFX() {
+            sfxEnabled = !sfxEnabled;
+            const icon = document.getElementById('sfx-icon');
+            if (sfxEnabled) {
+                icon.className = 'fa-solid fa-volume-high text-sm';
+                playAudio('click');
+            } else {
+                icon.className = 'fa-solid fa-volume-xmark text-sm text-slate-500';
+            }
+        }
+
+        // ==========================================
+        // FRAME PRODUCT CATALOG DATA
+        // ==========================================
+        const catalogProducts = [
+            {
+                id: 'lumen-x1',
+                name: 'Lumen Hexa',
+                shape: 'Geometric',
+                material: 'Titanium',
+                price: 1850000,
+                rating: 4.9,
+                badge: 'Terlaris',
+                image: 'https://images.unsplash.com/photo-1572635196237-14b3f281503f?auto=format&fit=crop&w=600&q=80',
+                description: 'Frame titanium ultralight jepang dengan bentuk heksagonal.',
+                defaultColor: '#18181b'
+            },
+            {
+                id: 'cyber-vision',
+                name: 'Neo Cat-Eye',
+                shape: 'Cat-Eye',
+                material: 'Acetate',
+                price: 1450000,
+                rating: 4.8,
+                badge: 'Tren',
+                image: 'https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&w=600&q=80',
+                description: 'Aksen sudut tajam khas gaya cybernetic dengan kenyamanan Acetate.',
+                defaultColor: '#2447e0'
+            },
+            {
+                id: 'aeroglide',
+                name: 'AeroGlide',
+                shape: 'Aviator',
+                material: 'Carbon Fiber',
+                price: 2100000,
+                rating: 5.0,
+                badge: 'Unggulan',
+                image: 'https://images.unsplash.com/photo-1508296695146-257a814070b4?auto=format&fit=crop&w=600&q=80',
+                description: 'Desain aviator ganda berbahan serat karbon yang tahan benturan.',
+                defaultColor: '#eab308'
+            },
+            {
+                id: 'quantum-sq',
+                name: 'Quantum Square',
+                shape: 'Square',
+                material: 'Acetate',
+                price: 1250000,
+                rating: 4.7,
+                badge: 'Populer',
+                image: 'https://images.unsplash.com/photo-1591076482161-42ce6da69f67?auto=format&fit=crop&w=600&q=80',
+                description: 'Garis kotaknya yang tegas memberikan kesan modern, cerdas, dan profesional.',
+                defaultColor: '#18181b'
+            },
+            {
+                id: 'orbital-pure',
+                name: 'Orbital Round',
+                shape: 'Round',
+                material: 'Titanium',
+                price: 1600000,
+                rating: 4.9,
+                badge: 'Minimalis',
+                image: 'https://images.unsplash.com/photo-1577803645773-f96470509666?auto=format&fit=crop&w=600&q=80',
+                description: 'Frame bulat titanium fleksibel seberat 8 gram yang hampir tak terasa di wajah.',
+                defaultColor: '#fb7185'
+            },
+            {
+                id: 'hyperdrive',
+                name: 'Matrix Square',
+                shape: 'Square',
+                material: 'Carbon Fiber',
+                price: 1950000,
+                rating: 4.8,
+                badge: 'Baru',
+                image: 'https://images.unsplash.com/photo-1573075425067-8a191172aff6?auto=format&fit=crop&w=600&q=80',
+                description: 'Kombinasi engsel pegas titanium & rangka karbon ramah untuk pemakaian seharian.',
+                defaultColor: '#18181b'
+            },
+            { id:'vertex-av', image:'https://images.unsplash.com/photo-1551910147-371009214918?auto=format&fit=crop&w=600&q=80', name:'Vertex Aviator', shape:'Aviator', material:'Titanium', price:2350000, rating:4.8, badge:'Premium', description:'Aviator titanium dengan bantalan hidung silikon dan engsel pegas yang kokoh.', defaultColor:'#b07a12' },
+            { id:'soho-round', image:'https://images.unsplash.com/photo-1552574023-e7095f12d660?auto=format&fit=crop&w=600&q=80', name:'Soho Round', shape:'Round', material:'Acetate', price:1150000, rating:4.6, badge:'Klasik', description:'Bulat klasik berbahan acetate tebal, nyaman dipakai untuk gaya kasual harian.', defaultColor:'#7c4a21' },
+            { id:'nova-cat', image:'https://images.unsplash.com/photo-1614715838608-dd527c46231d?auto=format&fit=crop&w=600&q=80', name:'Nova Cat-Eye', shape:'Cat-Eye', material:'Titanium', price:1750000, rating:4.7, badge:'Elegan', description:'Cat-eye ramping dari titanium dengan sudut atas yang terangkat halus.', defaultColor:'#c9707f' },
+            { id:'atlas-sq', image:'https://images.unsplash.com/photo-1551910021-c59ed3bf006b?auto=format&fit=crop&w=600&q=80', name:'Atlas Square', shape:'Square', material:'Titanium', price:1700000, rating:4.8, badge:'Profesional', description:'Rangka kotak tipis yang rapi untuk kerja kantoran dan pemakaian layar seharian.', defaultColor:'#15171c' },
+            { id:'prisma-geo', image:'https://images.unsplash.com/photo-1603578119639-798b8413d8d7?auto=format&fit=crop&w=600&q=80', name:'Prisma Geometric', shape:'Geometric', material:'Acetate', price:1350000, rating:4.5, badge:'Unik', description:'Bentuk geometris bersudut banyak yang memberi kesan berani namun tetap ringan.', defaultColor:'#0f766e' },
+            { id:'zephyr-av', image:'https://images.unsplash.com/photo-1552573773-9c204055fc0a?auto=format&fit=crop&w=600&q=80', name:'Zephyr Aviator', shape:'Aviator', material:'Carbon Fiber', price:2250000, rating:4.9, badge:'Ringan', description:'Aviator serat karbon seberat kurang dari 10 gram, hampir tak terasa di wajah.', defaultColor:'#3d434d' },
+            { id:'luna-round', image:'https://images.unsplash.com/photo-1646083774155-2a40b675641d?auto=format&fit=crop&w=600&q=80', name:'Luna Round', shape:'Round', material:'Carbon Fiber', price:1850000, rating:4.7, badge:'Baru', description:'Bulat tipis berbahan karbon dengan tekstur doff yang tahan gores.', defaultColor:'#2447e0' },
+            { id:'ember-cat', image:'https://images.unsplash.com/photo-1608539733377-5557e02926b5?auto=format&fit=crop&w=600&q=80', name:'Ember Cat-Eye', shape:'Cat-Eye', material:'Acetate', price:1300000, rating:4.6, badge:'Populer', description:'Cat-eye acetate berwarna hangat yang mudah dipadukan dengan gaya apa pun.', defaultColor:'#b42318' },
+            { id:'monolith-geo', image:'https://images.unsplash.com/photo-1646084081219-1090f72a531c?auto=format&fit=crop&w=600&q=80', name:'Monolith Geometric', shape:'Geometric', material:'Titanium', price:2050000, rating:4.9, badge:'Edisi Terbatas', stock:'Stok terbatas', description:'Heksagonal titanium edisi terbatas dengan finishing abu metalik.', defaultColor:'#7d848d' }
+        ];
+
+        // Semua produk memakai foto asli. Bila sebuah foto gagal dimuat, gambar cadangan dibuat
+        // otomatis dari bentuk dan warna frame. Ganti foto lewat properti "image" pada produk.
+        function frameSvg(shape, color) {
+            const L = (cx) => {
+                if (shape === 'Round') return `<circle cx="${cx}" cy="150" r="58"/>`;
+                if (shape === 'Square') return `<rect x="${cx-60}" y="104" width="120" height="92" rx="14"/>`;
+                if (shape === 'Cat-Eye') return `<path d="M${cx-60} 124 Q${cx+10} 92 ${cx+64} 104 Q${cx+58} 192 ${cx} 194 Q${cx-60} 192 ${cx-60} 124Z"/>`;
+                if (shape === 'Aviator') return `<path d="M${cx-62} 112 L${cx+62} 112 Q${cx+66} 200 ${cx} 202 Q${cx-66} 200 ${cx-62} 112Z"/>`;
+                const pts = [0,1,2,3,4,5].map(i => { const a = Math.PI/3*i + Math.PI/6; return (cx+Math.cos(a)*66).toFixed(1)+','+(150+Math.sin(a)*60).toFixed(1); }).join(' ');
+                return `<polygon points="${pts}"/>`;
+            };
+            const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"><rect width="400" height="300" fill="#eceee9"/>
+              <ellipse cx="200" cy="246" rx="130" ry="10" fill="#15171c" opacity=".08"/>
+              <g fill="rgba(140,185,200,.28)" stroke="${color}" stroke-width="8" stroke-linejoin="round" stroke-linecap="round">${L(112)}${L(288)}
+              <path d="M170 140 Q200 118 230 140" fill="none"/><path d="M52 132 L18 140 M348 132 L382 140" fill="none"/></g></svg>`;
+            return 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);
+        }
+        catalogProducts.forEach(p => { if (!p.image) p.image = frameSvg(p.shape, p.defaultColor); });
+        function fallbackImg(id) { const p = catalogProducts.find(x => x.id === id); return frameSvg(p.shape, p.defaultColor); }
+
+        // ==========================================
+        // VIRTUAL TRY-ON ENGINE & CANVAS DRAWING
+        // ==========================================
+        let activeFrame = catalogProducts[0];
+        let frameColor = '#18181b';
+        let fittingParams = {
+            scale: 1.0,
+            offsetX: 0,
+            offsetY: 0,
+            rotation: 0,
+            ipd: 64
+        };
+
+        let webcamStream = null;
+        let currentInputMode = 'preset'; // 'webcam', 'upload', 'preset'
+
+        const canvas = document.getElementById('tryon-canvas');
+        const ctx = canvas.getContext('2d');
+        const video = document.getElementById('webcam-video');
+        const presetImg = document.getElementById('preset-image');
+
+        function initTryOnCanvas() {
+            // Match canvas rendering size to element container size
+            const rect = canvas.getBoundingClientRect();
+            canvas.width = rect.width;
+            canvas.height = rect.height;
+            renderOverlay();
+        }
+
+        window.addEventListener('resize', initTryOnCanvas);
+
+        // ---- Eye alignment: face landmarks (MediaPipe) with a calibrated fallback ----
+        const FALLBACK_EYES = { 'photo-1534528741775': [0.50, 0.32, 0.667, 0.323] };
+        let eyeTarget = null, eyeCur = null, eyeBusy = false, eyeLast = 0, eyeLocked = false, faceLm = null;
+
+        function loadFaceLm() {
+            if (!faceLm) {
+                const base = 'https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.14';
+                faceLm = import(base + '/vision_bundle.mjs').then(async m => {
+                    const fs = await m.FilesetResolver.forVisionTasks(base + '/wasm');
+                    return m.FaceLandmarker.createFromOptions(fs, {
+                        baseOptions: { modelAssetPath: 'https://storage.googleapis.com/mediapipe-models/face_landmarker/face_landmarker/float16/1/face_landmarker.task' },
+                        runningMode: 'VIDEO', numFaces: 1
+                    });
+                });
+            }
+            return faceLm;
+        }
+
+        function resetEyes() { eyeTarget = null; eyeCur = null; eyeLocked = false; }
+        presetImg.addEventListener('load', resetEyes);
+
+        async function detectEyes(ts) {
+            if (eyeBusy) return;
+            eyeBusy = true;
+            try {
+                const cam = currentInputMode === 'webcam' && video.readyState >= 2;
+                const src = cam ? video : presetImg;
+                const nw = cam ? video.videoWidth : presetImg.naturalWidth;
+                const nh = cam ? video.videoHeight : presetImg.naturalHeight;
+                if (!nw || (!cam && eyeLocked)) return;
+                const lm = await loadFaceLm();
+                const f = lm.detectForVideo(src, ts).faceLandmarks[0];
+                if (!f) return;
+                const W = canvas.width, H = canvas.height, sc = Math.max(W / nw, H / nh);
+                const ox = (W - nw * sc) / 2, oy = (H - nh * sc) / 2;
+                const pt = q => ({ x: cam ? W - (q.x * nw * sc + ox) : q.x * nw * sc + ox, y: q.y * nh * sc + oy });
+                const mid = (a, b) => ({ x: (a.x + b.x) / 2, y: (a.y + b.y) / 2 });
+                const a = pt(f[468] || mid(f[33], f[133])), b = pt(f[473] || mid(f[362], f[263]));
+                const [l, r] = a.x < b.x ? [a, b] : [b, a];
+                eyeTarget = { lx: l.x, ly: l.y, rx: r.x, ry: r.y };
+                if (!cam) eyeLocked = true;
+            } catch (e) { /* offline or no WebGL: fallback below */ }
+            finally { eyeBusy = false; }
+        }
+
+        function currentEyes() {
+            let t = eyeTarget;
+            if (!t && currentInputMode !== 'webcam') {
+                const k = Object.keys(FALLBACK_EYES).find(key => presetImg.src.includes(key));
+                if (k) { const e = FALLBACK_EYES[k]; t = { lx: e[0] * canvas.width, ly: e[1] * canvas.height, rx: e[2] * canvas.width, ry: e[3] * canvas.height }; }
+            }
+            if (!t) return null;
+            if (!eyeCur) eyeCur = { ...t };
+            for (const key in t) eyeCur[key] += (t[key] - eyeCur[key]) * 0.35;
+            return eyeCur;
+        }
+
+        function renderOverlay() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            const now = performance.now();
+            if (now - eyeLast > 150) { eyeLast = now; detectEyes(now); }
+
+            let baseX = canvas.width / 2, baseY = canvas.height / 2.3, baseRot = 0, baseScale = 1;
+            const e = currentEyes();
+            if (e) {
+                baseX = (e.lx + e.rx) / 2; baseY = (e.ly + e.ry) / 2;
+                baseRot = Math.atan2(e.ry - e.ly, e.rx - e.lx);
+                baseScale = Math.hypot(e.rx - e.lx, e.ry - e.ly) / (2 * (48 + 8.4));
+            }
+
+            ctx.save();
+            ctx.translate(baseX + parseFloat(fittingParams.offsetX), baseY + parseFloat(fittingParams.offsetY));
+            ctx.rotate(baseRot + (parseFloat(fittingParams.rotation) * Math.PI) / 180);
+            ctx.scale(baseScale * parseFloat(fittingParams.scale), baseScale * parseFloat(fittingParams.scale));
+
+            drawGlassesVector(ctx, shapeOverride || activeFrame.shape, frameColor, fittingParams.ipd);
+
+            ctx.restore();
+
+            requestAnimationFrame(renderOverlay);
+        }
+
+        function drawGlassesVector(ctx, shape, color, ipd) {
+            const bridgeWidth = (ipd - 50) * 1.2;
+            const lensRadius = 48;
+
+            ctx.lineWidth = 6;
+            ctx.strokeStyle = color;
+            ctx.fillStyle = 'rgba(120, 150, 170, 0.14)'; // Subtle lens glare tint
+
+            // Left & Right Lens Paths
+            const leftCenterX = -(lensRadius + bridgeWidth / 2);
+            const rightCenterX = (lensRadius + bridgeWidth / 2);
+
+            // Draw Nose Bridge
+            ctx.beginPath();
+            ctx.moveTo(leftCenterX + lensRadius - 5, -10);
+            ctx.quadraticCurveTo(0, -25, rightCenterX - lensRadius + 5, -10);
+            ctx.stroke();
+
+            ctx.lineJoin = 'round';
+
+            // Draw Lens Shapes
+            if (shape === 'Oval' || shape === 'Heart' || shape === 'Aviator') {
+                [leftCenterX, rightCenterX].forEach(cx => {
+                    ctx.beginPath();
+                    extraLensPath(ctx, shape, cx, lensRadius);
+                    ctx.fill();
+                    ctx.stroke();
+                });
+            } else if (shape === 'Round') {
+                // Left Round
+                ctx.beginPath();
+                ctx.arc(leftCenterX, 0, lensRadius, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.stroke();
+                // Right Round
+                ctx.beginPath();
+                ctx.arc(rightCenterX, 0, lensRadius, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.stroke();
+            } else if (shape === 'Square') {
+                // Left Square
+                drawRoundedRect(ctx, leftCenterX - lensRadius, -lensRadius * 0.9, lensRadius * 2, lensRadius * 1.8, 10);
+                // Right Square
+                drawRoundedRect(ctx, rightCenterX - lensRadius, -lensRadius * 0.9, lensRadius * 2, lensRadius * 1.8, 10);
+            } else if (shape === 'Cat-Eye') {
+                // Left Cat Eye
+                ctx.beginPath();
+                ctx.moveTo(leftCenterX - lensRadius - 15, -lensRadius - 10);
+                ctx.lineTo(leftCenterX + lensRadius, -lensRadius + 5);
+                ctx.quadraticCurveTo(leftCenterX + lensRadius, lensRadius, leftCenterX, lensRadius);
+                ctx.quadraticCurveTo(leftCenterX - lensRadius, lensRadius, leftCenterX - lensRadius - 15, -lensRadius - 10);
+                ctx.fill();
+                ctx.stroke();
+                // Right Cat Eye
+                ctx.beginPath();
+                ctx.moveTo(rightCenterX + lensRadius + 15, -lensRadius - 10);
+                ctx.lineTo(rightCenterX - lensRadius, -lensRadius + 5);
+                ctx.quadraticCurveTo(rightCenterX - lensRadius, lensRadius, rightCenterX, lensRadius);
+                ctx.quadraticCurveTo(rightCenterX + lensRadius, lensRadius, rightCenterX + lensRadius + 15, -lensRadius - 10);
+                ctx.fill();
+                ctx.stroke();
+            } else {
+                // Geometric Hexagon default
+                drawHexagon(ctx, leftCenterX, 0, lensRadius);
+                drawHexagon(ctx, rightCenterX, 0, lensRadius);
+            }
+
+            // Draw Lens Glare Highlight Reflection
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.35)';
+            ctx.beginPath();
+            ctx.ellipse(leftCenterX - 15, -15, 18, 5, -Math.PI / 4, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.beginPath();
+            ctx.ellipse(rightCenterX - 15, -15, 18, 5, -Math.PI / 4, 0, Math.PI * 2);
+            ctx.fill();
+        }
+
+        let shapeOverride = null;
+        const SHAPE_LABEL = { 'Oval': 'Oval', 'Round': 'Bulat', 'Square': 'Kotak', 'Heart': 'Hati', 'Cat-Eye': 'Cat-Eye', 'Aviator': 'Aviator', 'Hexagon': 'Hexagon' };
+
+        function markShapeBtn(shape) {
+            document.querySelectorAll('.shape-btn').forEach(b => {
+                const on = b.dataset.shape === shape;
+                b.classList.toggle('active', on);
+                ['bg-cyber-cyan/20', 'border-cyber-cyan', 'text-ink'].forEach(c => b.classList.toggle(c, on));
+                ['bg-slate-900', 'border-slate-800', 'text-slate-300'].forEach(c => b.classList.toggle(c, !on));
+            });
+        }
+
+        function setFrameShape(shape, btn) {
+            if (btn) playAudio('click');
+            shapeOverride = shape;
+            markShapeBtn(shape);
+            document.getElementById('hud-frame-name').innerText = 'Frame ' + SHAPE_LABEL[shape];
+        }
+
+        setFrameShape('Oval');
+
+        // Lens outlines for the extra shapes, centred on (cx, 0) so they sit on the pupils.
+        function extraLensPath(ctx, shape, cx, r) {
+            if (shape === 'Oval') {
+                ctx.ellipse(cx, 0, r + 3, r * 0.76, 0, 0, Math.PI * 2);
+            } else if (shape === 'Heart') {
+                ctx.moveTo(cx, r * 0.9);
+                ctx.bezierCurveTo(cx - r * 1.3, r * 0.2, cx - r * 1.05, -r * 1.0, cx, -r * 0.4);
+                ctx.bezierCurveTo(cx + r * 1.05, -r * 1.0, cx + r * 1.3, r * 0.2, cx, r * 0.9);
+            } else { // Aviator teardrop
+                ctx.moveTo(cx - r, -r * 0.6);
+                ctx.quadraticCurveTo(cx, -r * 1.05, cx + r, -r * 0.6);
+                ctx.bezierCurveTo(cx + r * 1.05, r * 0.3, cx + r * 0.3, r, cx, r);
+                ctx.bezierCurveTo(cx - r * 0.3, r, cx - r * 1.05, r * 0.3, cx - r, -r * 0.6);
+            }
+            ctx.closePath();
+        }
+
+        function drawRoundedRect(ctx, x, y, width, height, radius) {
+            ctx.beginPath();
+            ctx.roundRect(x, y, width, height, radius);
+            ctx.fill();
+            ctx.stroke();
+        }
+
+        function drawHexagon(ctx, x, y, radius) {
+            ctx.beginPath();
+            for (let i = 0; i < 6; i++) {
+                const angle = (Math.PI / 3) * i;
+                const hx = x + radius * Math.cos(angle);
+                const hy = y + radius * Math.sin(angle);
+                if (i === 0) ctx.moveTo(hx, hy);
+                else ctx.lineTo(hx, hy);
+            }
+            ctx.closePath();
+            ctx.fill();
+            ctx.stroke();
+        }
+
+        // ==========================================
+        // INPUT MODE SWITCHING (Webcam / Upload / Preset)
+        // ==========================================
+        function switchInputMode(mode) {
+            currentInputMode = mode;
+            playAudio('click');
+
+            document.getElementById('mode-webcam-btn').className = mode === 'webcam' ? 'px-4 py-2 rounded-md text-xs font-tech font-bold transition-all bg-cyber-cyan text-slate-950 shadow-md' : 'px-4 py-2 rounded-md text-xs font-tech font-bold transition-all text-slate-400 hover:text-ink';
+            document.getElementById('mode-upload-btn').className = mode === 'upload' ? 'px-4 py-2 rounded-md text-xs font-tech font-bold transition-all bg-cyber-cyan text-slate-950 shadow-md' : 'px-4 py-2 rounded-md text-xs font-tech font-bold transition-all text-slate-400 hover:text-ink';
+            document.getElementById('mode-preset-btn').className = mode === 'preset' ? 'px-4 py-2 rounded-md text-xs font-tech font-bold transition-all bg-cyber-cyan text-slate-950 shadow-md' : 'px-4 py-2 rounded-md text-xs font-tech font-bold transition-all text-slate-400 hover:text-ink';
+
+            const presetBar = document.getElementById('preset-models-bar');
+
+            if (mode === 'webcam') {
+                presetBar.classList.add('hidden');
+                presetImg.classList.add('hidden');
+                video.classList.remove('hidden');
+
+                if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+                    navigator.mediaDevices.getUserMedia({ video: true })
+                        .then(stream => {
+                            webcamStream = stream;
+                            video.srcObject = stream;
+                        })
+                        .catch(err => {
+                            alert('Gagal mengakses webcam: ' + err.message);
+                            switchInputMode('preset');
+                        });
+                }
+            } else {
+                if (webcamStream) {
+                    webcamStream.getTracks().forEach(track => track.stop());
+                    webcamStream = null;
+                }
+                video.classList.add('hidden');
+                presetImg.classList.remove('hidden');
+
+                if (mode === 'preset') {
+                    presetBar.classList.remove('hidden');
+                } else if (mode === 'upload') {
+                    presetBar.classList.add('hidden');
+                    document.getElementById('photo-upload-input').click();
+                }
+            }
+        }
+
+        function handlePhotoUpload(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(evt) {
+                    presetImg.src = evt.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function setPresetModel(url, name, btn) {
+            playAudio('click');
+            presetImg.src = url;
+            document.querySelectorAll('.preset-thumb-btn').forEach(b => {
+                const on = b === btn;
+                b.classList.toggle('active', on);
+                ['bg-cyber-cyan/20', 'border-cyber-cyan', 'text-ink'].forEach(c => b.classList.toggle(c, on));
+                ['bg-slate-900', 'border-slate-800', 'text-slate-300'].forEach(c => b.classList.toggle(c, !on));
+            });
+            setFrameShape(name === 'Kotak' ? 'Square' : 'Oval');
+        }
+
+        // ==========================================
+        // FITTING CONTROLS & COLOR SWATCHES
+        // ==========================================
+        function updateFitting() {
+            fittingParams.scale = document.getElementById('slider-scale').value;
+            fittingParams.offsetY = document.getElementById('slider-offset-y').value;
+            fittingParams.offsetX = document.getElementById('slider-offset-x').value;
+            fittingParams.rotation = document.getElementById('slider-rotation').value;
+            fittingParams.ipd = document.getElementById('slider-ipd').value;
+
+            document.getElementById('val-scale').innerText = Math.round(fittingParams.scale * 100) + '%';
+            document.getElementById('val-offset-y').innerText = fittingParams.offsetY + 'px';
+            document.getElementById('val-offset-x').innerText = fittingParams.offsetX + 'px';
+            document.getElementById('val-rotation').innerText = fittingParams.rotation + '°';
+            document.getElementById('val-ipd').innerText = fittingParams.ipd + ' mm';
+        }
+
+        function resetFrameFitting() {
+            playAudio('click');
+            document.getElementById('slider-scale').value = 1.0;
+            document.getElementById('slider-offset-y').value = 0;
+            document.getElementById('slider-offset-x').value = 0;
+            document.getElementById('slider-rotation').value = 0;
+            document.getElementById('slider-ipd').value = 64;
+            updateFitting();
+        }
+
+        function setFrameColor(color, colorName) {
+            playAudio('click');
+            frameColor = color;
+            document.getElementById('hud-frame-color').innerText = colorName;
+        }
+
+        function selectTryOnFrame(productId) {
+            playAudio('scan');
+            const p = catalogProducts.find(item => item.id === productId);
+            if (p) {
+                activeFrame = p;
+                shapeOverride = null; markShapeBtn(null);
+                frameColor = p.defaultColor;
+                document.getElementById('hud-frame-name').innerText = p.name;
+                document.getElementById('hud-frame-color').innerText = 'Standard Shade';
+                document.getElementById('tryon-studio').scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        // ==========================================
+        // AI StyleIQ FACE DIAGNOSTIC SCANNER
+        // ==========================================
+        function runAIFaceDiagnostic() {
+            playAudio('scan');
+            const laser = document.getElementById('laser-scanner');
+            const resPanel = document.getElementById('ai-diagnostic-result');
+
+            laser.classList.add('laser-scanning');
+
+            setTimeout(() => {
+                laser.classList.remove('laser-scanning');
+                resPanel.classList.remove('hidden');
+                playAudio('success');
+
+                const shapes = [
+                    { name: 'Oval, seimbang', score: '98.5%', desc: 'Bentuk wajah Oval sangat fleksibel! Frame Geometric & Cat-Eye memberikan proporsi wajah terbaik.' },
+                    { name: 'Persegi, tegas', score: '96.2%', desc: 'Garis rahang Anda tegas! Frame Bulat (Orbital Pure) & Aviator akan memperlembut sudut wajah secara elegan.' },
+                    { name: 'Hati, berlian', score: '97.8%', desc: 'Dahi anggun dengan dagu lancip. Frame Cat-Eye & Square sangat direkomendasikan!' }
+                ];
+
+                const picked = shapes[Math.floor(Math.random() * shapes.length)];
+                document.getElementById('res-face-shape').innerText = picked.name;
+                document.getElementById('res-match-score').innerText = picked.score + ' cocok';
+                document.getElementById('res-description').innerText = picked.desc;
+            }, 2000);
+        }
+
+        // ==========================================
+        // VISION SIMULATOR LAB
+        // ==========================================
+        let currentVisionMode = 'blueshield';
+
+        function visionScene(mode, lens, k) {
+            const open = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" preserveAspectRatio="xMidYMid slice" class="absolute inset-0 w-full h-full">';
+            let b = '';
+            if (mode === 'blueshield') {
+                b = `<rect width="1200" height="675" fill="#cfd5db"/><rect y="500" width="1200" height="175" fill="#a98458"/>
+                <rect x="300" y="110" width="600" height="340" rx="14" fill="#20232a"/><rect x="320" y="130" width="560" height="300" rx="6" fill="#7fb4ff"/>
+                <rect x="350" y="165" width="260" height="18" fill="#fff" opacity=".85"/><rect x="350" y="200" width="420" height="10" fill="#fff" opacity=".6"/>
+                <rect x="350" y="225" width="380" height="10" fill="#fff" opacity=".6"/><rect x="350" y="250" width="400" height="10" fill="#fff" opacity=".6"/>
+                <rect x="640" y="300" width="200" height="100" rx="8" fill="#fff" opacity=".35"/>
+                <rect x="570" y="450" width="60" height="55" fill="#20232a"/><rect x="490" y="500" width="220" height="14" rx="7" fill="#20232a"/>
+                <rect x="340" y="545" width="520" height="36" rx="6" fill="#2c3038"/><rect x="930" y="450" width="70" height="80" rx="10" fill="#f1ece3"/>`;
+            } else if (mode === 'photochromic') {
+                b = `<rect width="1200" height="675" fill="#78c0f4"/><circle cx="930" cy="150" r="140" fill="#fff7c4" opacity=".5"/><circle cx="930" cy="150" r="70" fill="#fff3a6"/>
+                <path d="M0 470 Q300 330 560 450 T1200 400 V675 H0Z" fill="#4f9a5a"/><path d="M0 570 Q400 490 800 570 T1200 550 V675 H0Z" fill="#3f8450"/>
+                <rect x="200" y="380" width="170" height="120" fill="#f4efe6"/><path d="M185 380 L285 310 L385 380Z" fill="#c4552f"/><rect x="265" y="430" width="40" height="70" fill="#7a4a2a"/>
+                <circle cx="800" cy="420" r="48" fill="#2f6f3f"/><rect x="794" y="445" width="12" height="75" fill="#6a4426"/>`;
+            } else if (mode === 'polarized') {
+                const g = lens ? 0.05 + 0.1 * k : 0.35 + 0.6 * k;
+                b = `<rect width="1200" height="300" fill="#a9d6f2"/><circle cx="600" cy="110" r="60" fill="#fffbe0"/>
+                <path d="M0 300 L180 190 L320 270 L520 160 L700 280 L900 200 L1200 300Z" fill="#5e7f8f"/><rect y="300" width="1200" height="375" fill="#3b86b3"/>
+                <g opacity="${g}" fill="#fff"><rect x="480" y="310" width="240" height="14" rx="7"/><rect x="520" y="345" width="160" height="14" rx="7"/><rect x="440" y="380" width="320" height="16" rx="8"/>
+                <rect x="500" y="425" width="200" height="14" rx="7"/><rect x="450" y="475" width="300" height="16" rx="8"/><rect x="540" y="530" width="120" height="14" rx="7"/><ellipse cx="920" cy="410" rx="130" ry="10"/></g>`;
+            } else {
+                const r = lens ? 30 + 60 * k : 90 + 200 * k;
+                b = `<defs><radialGradient id="hg"><stop offset="0" stop-color="#fffbe0"/><stop offset=".4" stop-color="#fff2a8" stop-opacity=".6"/><stop offset="1" stop-color="#fff2a8" stop-opacity="0"/></radialGradient></defs>
+                <rect width="1200" height="675" fill="#0a0e18"/><rect x="60" y="190" width="150" height="160" fill="#121829"/><rect x="240" y="250" width="110" height="100" fill="#121829"/><rect x="900" y="170" width="170" height="180" fill="#121829"/>
+                <g fill="#e9c46a" opacity=".7"><rect x="85" y="215" width="14" height="18"/><rect x="125" y="260" width="14" height="18"/><rect x="930" y="205" width="14" height="18"/><rect x="990" y="250" width="14" height="18"/></g>
+                <path d="M560 340 L640 340 L1100 675 L100 675Z" fill="#1b2130"/><path d="M598 345 L602 345 L640 675 L560 675Z" fill="#e8e0b0" opacity=".45"/>
+                <circle cx="500" cy="365" r="${r}" fill="url(#hg)"/><circle cx="700" cy="365" r="${r}" fill="url(#hg)"/><circle cx="500" cy="365" r="12" fill="#fff"/><circle cx="700" cy="365" r="12" fill="#fff"/>`;
+            }
+            return open + b + '</svg>' + visionPhoto(mode) + visionGlare(mode, lens, k);
+        }
+
+        const VISION_PHOTOS = {
+            blueshield: ['https://images.pexels.com/photos/31862215/pexels-photo-31862215/free-photo-of-man-editing-photos-on-dual-monitors-at-night.jpeg?auto=compress&cs=tinysrgb&w=1200', 'https://images.pexels.com/photos/31862218/pexels-photo-31862218/free-photo-of-young-man-in-dark-room-working-on-computer-setup.jpeg?auto=compress&cs=tinysrgb&w=1200'],
+            photochromic: 'https://images.pexels.com/photos/1365425/pexels-photo-1365425.jpeg?auto=compress&cs=tinysrgb&w=1200',
+            polarized: 'https://images.pexels.com/photos/18439378/pexels-photo-18439378/free-photo-of-sunlight-reflecting-in-sea.jpeg?auto=compress&cs=tinysrgb&w=1200',
+            nightdrive: 'https://unsplash.com/photos/Jk3-Uhdwjcs/download?force=true&w=1200'
+        };
+
+        // If a photo fails to load it removes itself and the illustration underneath shows instead.
+        function visionPhoto(mode) {
+            return `<img src="${[].concat(VISION_PHOTOS[mode])[0]}" alt="" referrerpolicy="no-referrer" onerror="visionPhotoFail(this, '${mode}')" class="absolute inset-0 w-full h-full object-cover">`;
+        }
+
+        // Try the next photo in the list; remove the <img> when none are left.
+        function visionPhotoFail(img, mode) {
+            const list = [].concat(VISION_PHOTOS[mode]);
+            const n = (+img.dataset.n || 0) + 1;
+            img.dataset.n = n;
+            if (list[n]) img.src = list[n]; else img.remove();
+        }
+
+        // Extra glare for polarized / night drive: strong outside the lens, mostly cut inside it.
+        function visionGlare(mode, lens, k) {
+            let bg = '';
+            if (mode === 'polarized') {
+                const a = lens ? 0.04 + 0.08 * k : 0.25 + 0.5 * k;
+                bg = `radial-gradient(ellipse 45% 30% at 50% 58%, rgba(255,255,255,${a}), transparent 70%)`;
+            } else if (mode === 'nightdrive') {
+                const r = lens ? 14 + 10 * k : 22 + 22 * k, a = lens ? 0.25 : 0.55 + 0.4 * k;
+                bg = `radial-gradient(circle at 36% 55%, rgba(255,246,190,${a}), transparent ${r}%), radial-gradient(circle at 64% 55%, rgba(255,246,190,${a}), transparent ${r}%)`;
+            }
+            return bg ? `<div class="absolute inset-0" style="background:${bg}"></div>` : '';
+        }
+
+        const VISION_TEXT = {
+            blueshield: ['Lensa BlueShield Digital Anti-Glare', 'BlueShield: filter layar digital', 'Mengeliminasi 99% sinar biru radiasi monitor & layar HP untuk mencegah kelelahan mata digital.'],
+            photochromic: ['PhotoChromic Smart UV Transisi', 'Photochromic: gelap otomatis di luar ruangan', 'Lensa berubah menjadi gelap otomatis saat terkena terik sinar matahari outdoor dan jernih kembali di indoor.'],
+            polarized: ['Polarized Ultra-HD Anti-Pantulan Air', 'Polarized: potong silau pantulan', 'Menghilangkan silau pantulan air, kaca, dan jalan terik dengan kontras warna definisi tinggi.'],
+            nightdrive: ['NightDrive Anti-Halo Headlight Filter', 'NightDrive: kurangi silau lampu malam', 'Mengurangi efek silau halo lampu sorot mobil malam hari agar berkendara jauh lebih aman.']
+        };
+
+        function visionRender() {
+            const k = document.getElementById('vision-intensity-slider').value / 100;
+            document.getElementById('vision-scene').innerHTML = visionScene(currentVisionMode, false, k);
+            document.getElementById('vision-scene-lens').innerHTML = visionScene(currentVisionMode, true, k);
+            const f = {
+                blueshield: `sepia(${0.2 + k * 0.5}) saturate(0.9)`,
+                photochromic: `brightness(${1 - k * 0.6}) contrast(${1 + k * 0.2})`,
+                polarized: 'saturate(1.35) contrast(1.1)',
+                nightdrive: 'contrast(1.1) brightness(0.95)'
+            };
+            document.getElementById('vision-scene-lens').style.filter = f[currentVisionMode];
+        }
+
+        function setVisionMode(mode) {
+            playAudio('click');
+            currentVisionMode = mode;
+            document.querySelectorAll('.vision-tab').forEach(b => {
+                b.className = 'vision-tab px-5 py-2.5 rounded-md text-xs font-tech font-bold border border-slate-800 text-slate-400 hover:text-ink transition-all';
+            });
+            document.getElementById('vtab-' + mode).className = 'vision-tab active px-5 py-2.5 rounded-md text-xs font-tech font-bold border transition-all bg-cyber-cyan text-slate-950 border-cyber-cyan';
+            const t = VISION_TEXT[mode];
+            document.getElementById('vision-lens-badge').innerText = t[0];
+            document.getElementById('vision-title').innerText = t[1];
+            document.getElementById('vision-desc').innerText = t[2];
+            visionRender();
+        }
+
+        function updateVisionIntensity(val) {
+            document.getElementById('vision-slider-val').innerText = val + '%';
+            visionRender();
+        }
+        visionRender();
+
+        // ==========================================
+        // E-COMMERCE PRODUCT CATALOG RENDER
+        // ==========================================
+        function renderCatalog(items) {
+            const grid = document.getElementById('product-grid');
+            grid.innerHTML = '';
+            const count = document.getElementById('catalog-result-count');
+            if (count) count.innerText = `${items.length} frame tersedia`;
+
+            if (!items.length) {
+                grid.innerHTML = `
+                    <div class="col-span-full py-16 text-center border border-dashed border-slate-800 rounded-lg bg-white/50">
+                        <i class="fa-solid fa-glasses text-3xl text-slate-400 mb-4"></i>
+                        <h3 class="font-tech font-bold text-ink">Frame tidak ditemukan</h3>
+                        <p class="text-xs text-slate-400 mt-1 mb-4">Coba kombinasi bentuk atau material lain.</p>
+                        <button onclick="resetCatalogFilters()" class="px-4 py-2 rounded-md border border-slate-800 text-xs font-tech font-bold hover:border-cyber-cyan transition-colors">Tampilkan semua</button>
+                    </div>`;
+                return;
+            }
+
+            items.forEach(p => {
+                const card = document.createElement('article');
+                card.className = 'lo-product-card rounded-lg p-4 sm:p-5 transition-all duration-300 flex flex-col justify-between group';
+                card.innerHTML = `
+                    <div>
+                        <div class="lo-product-media relative aspect-[4/3] rounded-md overflow-hidden mb-5">
+                            <img src="${p.image}" alt="${p.name} — frame ${p.shape}, ${p.material}" loading="lazy" onerror="this.onerror=null;this.src=fallbackImg('${p.id}')" class="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-500">
+                            <span class="absolute top-3 left-3 bg-white/95 backdrop-blur-sm text-ink text-[10px] font-tech font-bold px-2.5 py-1 rounded-full">${p.badge}</span>
+                            <span class="absolute bottom-3 right-3 bg-white/95 text-ink text-[11px] font-tech font-bold px-2.5 py-1 rounded-full flex items-center gap-1">
+                                <i class="fa-solid fa-star text-cyber-gold"></i> ${p.rating}
+                            </span>
+                        </div>
+                        <div class="flex items-center justify-between gap-3 mb-2">
+                            <span class="text-[10px] uppercase tracking-wider font-tech font-bold text-cyber-cyan">${p.shape}</span>
+                            <span class="text-[10px] lo-meta font-tech">${p.material}</span>
+                        </div>
+                        <h3 class="text-xl font-bold font-tech text-ink">${p.name}</h3>
+                        <p class="text-xs text-slate-400 leading-relaxed mt-2 mb-5 line-clamp-2">${p.description}</p>
+                    </div>
+                    <div class="pt-4 border-t border-slate-800">
+                        <div class="flex items-end justify-between gap-3 mb-4">
+                            <div><p class="text-[10px] text-slate-400 font-tech mb-0.5">Mulai dari</p><p class="text-xl font-bold font-tech text-ink">Rp ${p.price.toLocaleString('id-ID')}</p></div>
+                            <span class="text-[10px] ${p.stock ? 'text-amber-700' : 'text-emerald-700'} font-tech font-semibold">${p.stock || 'Stok tersedia'}</span>
+                        </div>
+                        <button onclick="openLensCrafterModal('${p.id}')" aria-label="Konfigurasi ${p.name}" class="lo-buy w-full py-2.5 rounded-md bg-ink text-white text-xs font-tech font-bold hover:bg-cyber-cyan hover:text-slate-950 transition-all flex items-center justify-center gap-1.5">
+                            <i class="fa-solid fa-sliders"></i> Pilih &amp; konfigurasi
+                        </button>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function applyCatalogFilters() {
+            playAudio('click');
+            const shape = document.getElementById('filter-shape').value;
+            const mat = document.getElementById('filter-material').value;
+            const sort = document.getElementById('sort-catalog').value;
+            let filtered = catalogProducts.filter(p => {
+                return (shape === 'all' || p.shape === shape) && (mat === 'all' || p.material === mat);
+            });
+            if (sort === 'price-low') filtered.sort((a,b) => a.price-b.price);
+            if (sort === 'price-high') filtered.sort((a,b) => b.price-a.price);
+            if (sort === 'rating') filtered.sort((a,b) => b.rating-a.rating);
+            renderCatalog(filtered);
+        }
+
+        function resetCatalogFilters() {
+            document.getElementById('filter-shape').value = 'all';
+            document.getElementById('filter-material').value = 'all';
+            document.getElementById('sort-catalog').value = 'featured';
+            renderCatalog(catalogProducts);
+        }
+
+        // ==========================================
+        // LENS CRAFTER PRESCRIPTION CONFIGURATOR
+        // ==========================================
+        let selectedConfigProduct = catalogProducts[0];
+
+        const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c]));
+        const uid = () => Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
+        const MAX_QTY = 5;
+        const STORE_WA = '6281234567890'; // GANTI dengan nomor WhatsApp toko (format 62..., tanpa tanda +)
+        const FRAME_COLORS = [
+            { hex:'#18181b', name:'Hitam doff' },
+            { hex:'#eab308', name:'Metallic Gold' },
+            { hex:'#2447e0', name:'Cobalt' },
+            { hex:'#fb7185', name:'Rose Gold Titanium' },
+            { hex:'rgba(255,255,255,0.6)', name:'Bening' },
+            { hex:'#78350f', name:'Tortoise Shell Amber' }
+        ];
+        const LENS_LABEL = { 'non-prescription':'Fashion (tanpa resep)', 'single-vision':'Single Vision', 'blue-shield':'BlueShield', 'progressive':'Progressive Smart HD' };
+        const LENS_PRICE = { 'non-prescription':0, 'single-vision':350000, 'blue-shield':450000, 'progressive':750000 };
+        const COATINGS = [
+            { id:'coat-anti-reflective', label:'Anti-Reflective', price:100000 },
+            { id:'coat-hydrophobic', label:'Hydrophobic', price:150000 },
+            { id:'coat-anti-scratch', label:'Scratch-Shield', price:80000 }
+        ];
+        const RX_KEYS = ['sph', 'cyl', 'axis', 'add', 'pd'];
+        let cfgColor = FRAME_COLORS[0];
+        let editingCartId = null;
+
+        function calcPrice(base, lensType, coatingLabels) {
+            return base + (LENS_PRICE[lensType] || 0)
+                + COATINGS.filter(c => coatingLabels.includes(c.label)).reduce((a, c) => a + c.price, 0);
+        }
+        const pickFrame = p => ({ id:p.id, name:p.name, image:p.image, shape:p.shape, material:p.material, price:p.price });
+
+        function curLensType() { const r = document.querySelector('input[name="lens-type"]:checked'); return r ? r.value : 'non-prescription'; }
+        function curRxMode() { const r = document.querySelector('input[name="rx-mode"]:checked'); return r ? r.value : 'fill'; }
+        function setRxMode(m) { const r = document.querySelector(`input[name="rx-mode"][value="${m}"]`); if (r) r.checked = true; }
+        function rxInput(eye, k) { return $id(`rx-${eye}-${k}`); }
+        function rxHasValues() { return ['od', 'os'].some(e => rxInput(e, 'sph').value.trim() || rxInput(e, 'cyl').value.trim()); }
+        function selectedCoatings() { return COATINGS.filter(c => $id(c.id).checked).map(c => c.label); }
+
+        function clearRxFields() {
+            ['od', 'os'].forEach(e => RX_KEYS.forEach(k => { const el = rxInput(e, k); el.value = ''; el.removeAttribute('aria-invalid'); }));
+            $id('rx-err').textContent = '';
+        }
+        document.addEventListener('input', e => {
+            if (e.target.classList && e.target.classList.contains('rx-in')) { e.target.removeAttribute('aria-invalid'); $id('rx-err').textContent = ''; }
+        });
+
+        // ---- tampilan form sesuai jenis lensa dan mode resep
+        function applyRxModeUI() {
+            const m = curRxMode();
+            $id('rx-fields').classList.toggle('hidden', m !== 'fill');
+            $id('rx-later-note').classList.toggle('hidden', m !== 'later');
+            $id('rx-err').textContent = '';
+        }
+        function onRxModeChange() { playAudio('click'); applyRxModeUI(); }
+        function applyLensTypeUI() {
+            const t = curLensType();
+            $id('prescription-form-block').classList.toggle('hidden', t === 'non-prescription');
+            $id('rx-plano-opt').classList.toggle('hidden', t !== 'blue-shield');
+            document.querySelectorAll('.rx-add-cell').forEach(el => el.classList.toggle('hidden', t !== 'progressive'));
+            const m = curRxMode();
+            if (t === 'blue-shield' && m === 'fill' && !rxHasValues()) setRxMode('plano');
+            if (t !== 'blue-shield' && m === 'plano') setRxMode('fill');
+            applyRxModeUI();
+            updateLensPrice();
+        }
+        function onLensTypeChange() { playAudio('click'); applyLensTypeUI(); }
+
+        function renderCfgColors() {
+            $id('cfg-colors').innerHTML = FRAME_COLORS.map((c, i) =>
+                `<button type="button" onclick="pickCfgColor(${i})" class="cfg-swatch" style="background:${c.hex}" title="${esc(c.name)}" aria-label="${esc(c.name)}" aria-pressed="${c.hex === cfgColor.hex}"></button>`).join('');
+            $id('cfg-color-name').textContent = cfgColor.name;
+        }
+        function pickCfgColor(i) { playAudio('click'); cfgColor = FRAME_COLORS[i]; renderCfgColors(); }
+
+        function resetConfigurator(colorHex) {
+            document.querySelector('input[name="lens-type"][value="non-prescription"]').checked = true;
+            setRxMode('fill');
+            clearRxFields();
+            COATINGS.forEach(c => { $id(c.id).checked = c.id !== 'coat-hydrophobic'; });
+            cfgColor = FRAME_COLORS.find(c => c.hex === (colorHex || selectedConfigProduct.defaultColor)) || FRAME_COLORS[0];
+            renderCfgColors();
+            applyLensTypeUI();
+        }
+
+        function openLensCrafterModal(productId, opts) {
+            playAudio('click');
+            const p = catalogProducts.find(item => item.id === productId);
+            if (p) selectedConfigProduct = p;
+            editingCartId = null;
+            resetConfigurator(opts && opts.colorHex);
+            $id('modal-frame-title').innerText = 'Konfigurasi Lensa - ' + selectedConfigProduct.name;
+            $id('lens-submit-btn').innerHTML = '<i class="fa-solid fa-cart-shopping mr-2"></i> Tambah ke keranjang';
+            $id('lens-modal').classList.remove('hidden');
+        }
+        function openLensCrafterModalCurrent() { openLensCrafterModal(activeFrame.id, { colorHex: frameColor }); }
+        function closeLensCrafterModal() {
+            playAudio('click');
+            editingCartId = null;
+            $id('lens-modal').classList.add('hidden');
+        }
+
+        function updateLensPrice() {
+            const total = calcPrice(selectedConfigProduct.price, curLensType(), selectedCoatings());
+            $id('modal-total-price').innerText = rupiah(total);
+            return total;
+        }
+
+        // ---- validasi resep
+        function parseDiopter(raw, min, max) {
+            const s = String(raw || '').trim().replace(',', '.').toLowerCase();
+            if (!s) return { empty: true };
+            if (s === 'plano' || s === 'pl') return { v: 0 };
+            if (!/^[+-]?\d{1,2}(\.\d{1,2})?$/.test(s)) return { err: 'format' };
+            const v = parseFloat(s);
+            if (Math.round(v * 100) % 25 !== 0) return { err: 'step' };
+            if (v < min || v > max) return { err: 'range' };
+            return { v };
+        }
+        const fmtD = v => (v > 0 ? '+' : '') + v.toFixed(2);
+
+        function collectRx() {
+            const type = curLensType();
+            if (type === 'non-prescription') return { ok: true, rx: { mode: 'none' } };
+            const mode = curRxMode();
+            if (mode === 'plano' || mode === 'later') return { ok: true, rx: { mode } };
+            const rx = { mode: 'fill', od: {}, os: {} };
+            let anyPower = false;
+            for (const eye of ['od', 'os']) {
+                const side = eye === 'od' ? 'mata kanan' : 'mata kiri';
+                const fail = (k, msg) => ({ ok: false, field: rxInput(eye, k), msg: `${msg} (${side}).` });
+
+                const sph = parseDiopter(rxInput(eye, 'sph').value, -20, 20);
+                if (sph.empty) return fail('sph', 'Isi SPH. Tulis 0 atau plano jika tidak ada angka');
+                if (sph.err) return fail('sph', sph.err === 'step' ? 'SPH harus kelipatan 0.25' : sph.err === 'range' ? 'SPH harus antara -20.00 dan +20.00' : 'Format SPH belum benar, contoh -1.50');
+
+                const cyl = parseDiopter(rxInput(eye, 'cyl').value, -8, 8);
+                if (cyl.err) return fail('cyl', cyl.err === 'step' ? 'CYL harus kelipatan 0.25' : cyl.err === 'range' ? 'CYL harus antara -8.00 dan +8.00' : 'Format CYL belum benar, contoh -0.50');
+                const cylV = cyl.empty ? 0 : cyl.v;
+
+                let axis = '';
+                if (cylV !== 0) {
+                    const a = rxInput(eye, 'axis').value.trim();
+                    if (!/^\d{1,3}$/.test(a) || +a < 1 || +a > 180) return fail('axis', 'AXIS wajib diisi angka 1 sampai 180 karena CYL tidak 0');
+                    axis = String(+a);
+                }
+
+                let add = '';
+                if (type === 'progressive') {
+                    const ad = parseDiopter(rxInput(eye, 'add').value, 0.5, 4);
+                    if (ad.empty) return fail('add', 'Isi ADD untuk lensa progressive, contoh +2.00');
+                    if (ad.err) return fail('add', 'ADD harus kelipatan 0.25 antara +0.50 dan +4.00');
+                    add = fmtD(ad.v);
+                }
+
+                const pdRaw = rxInput(eye, 'pd').value.trim().replace(',', '.');
+                if (!/^\d{2}(\.[05])?$/.test(pdRaw) || +pdRaw < 24 || +pdRaw > 40) return fail('pd', 'PD harus 24 sampai 40 mm, contoh 32 atau 32.5');
+
+                if (sph.v !== 0 || cylV !== 0) anyPower = true;
+                rx[eye] = { sph: fmtD(sph.v), cyl: fmtD(cylV), axis, add, pd: String(+pdRaw) };
+            }
+            if (!anyPower && type === 'single-vision') {
+                return { ok: false, field: rxInput('od', 'sph'), msg: 'Semua angka resep 0. Pilih lensa Fashion jika Anda tidak butuh koreksi.' };
+            }
+            return { ok: true, rx };
+        }
+        function showRxError(res) {
+            playAudio('click');
+            $id('rx-err').textContent = res.msg;
+            if (res.field) { res.field.setAttribute('aria-invalid', 'true'); res.field.focus(); }
+        }
+
+        function rxLines(rx) {
+            if (!rx || rx.mode === 'none') return ['Tanpa resep (lensa fashion)'];
+            if (rx.mode === 'plano') return ['Tanpa resep (plano)'];
+            if (rx.mode === 'later') return ['Resep dikirim lewat WhatsApp'];
+            const line = (tag, o) => `${tag}: SPH ${o.sph}` + (o.cyl && o.cyl !== '0.00' ? `, CYL ${o.cyl}, AXIS ${o.axis}` : '') + (o.add ? `, ADD ${o.add}` : '') + `, PD ${o.pd}`;
+            return [line('Kanan', rx.od), line('Kiri', rx.os)];
+        }
+
+        // ==========================================
+        // CART (tersimpan di perangkat) & VOUCHER
+        // ==========================================
+        let cart = [];
+        let appliedVoucher = null;
+        const VOUCHERS = { LUMEN2026: { value: 250000, label: 'potongan Rp 250.000' } };
+        const cartSubtotal = () => cart.reduce((a, i) => a + i.price * i.qty, 0);
+        const cartCount = () => cart.reduce((a, i) => a + i.qty, 0);
+        function voucherDiscount(subtotal) {
+            const v = appliedVoucher && VOUCHERS[appliedVoucher];
+            return v && subtotal ? Math.min(v.value, subtotal) : 0;
+        }
+        const cartKey = it => JSON.stringify([it.frame.id, it.color.hex, it.lensType, it.coatings, it.rx]);
+        function saveCart() { storeSet('lumen_cart', { items: cart, voucher: appliedVoucher }); }
+        function mergeDuplicates() {
+            const seen = {};
+            cart = cart.filter(i => {
+                const s = seen[i.key];
+                if (s) { s.qty = Math.min(MAX_QTY, s.qty + i.qty); return false; }
+                seen[i.key] = i; return true;
+            });
+        }
+        function initCart() {
+            const s = storeGet('lumen_cart');
+            if (s && Array.isArray(s.items)) {
+                cart = s.items.map(it => {
+                    const p = it && it.frame && catalogProducts.find(x => x.id === it.frame.id);
+                    if (!p || !it.rx || !it.color || !(it.qty > 0) || !LENS_LABEL[it.lensType]) return null;
+                    const coatings = Array.isArray(it.coatings) ? it.coatings : [];
+                    const item = { id: String(it.id || uid()), frame: pickFrame(p), color: it.color, lensType: it.lensType, coatings, rx: it.rx, qty: Math.min(MAX_QTY, Math.floor(it.qty)) };
+                    item.price = calcPrice(p.price, item.lensType, coatings);   // harga dihitung ulang dari katalog
+                    item.key = cartKey(item);
+                    return item;
+                }).filter(Boolean);
+                mergeDuplicates();
+                if (s.voucher && VOUCHERS[s.voucher]) { appliedVoucher = s.voucher; $id('voucher-code').value = s.voucher; }
+            }
+            updateCartUI();
+        }
+
+        function addConfiguredToCart() {
+            const res = collectRx();
+            if (!res.ok) { showRxError(res); return; }
+            playAudio('success');
+            const lensType = curLensType();
+            const coatings = selectedCoatings();
+            const item = {
+                id: uid(),
+                frame: pickFrame(selectedConfigProduct),
+                color: { hex: cfgColor.hex, name: cfgColor.name },
+                lensType, coatings,
+                price: calcPrice(selectedConfigProduct.price, lensType, coatings),
+                rx: res.rx,
+                qty: 1
+            };
+            item.key = cartKey(item);
+
+            if (editingCartId) {
+                const idx = cart.findIndex(i => i.id === editingCartId);
+                if (idx > -1) { item.id = editingCartId; item.qty = cart[idx].qty; cart[idx] = item; mergeDuplicates(); }
+                editingCartId = null;
+                showToast('Perubahan konfigurasi disimpan.');
+            } else {
+                const same = cart.find(i => i.key === item.key);
+                if (same) {
+                    if (same.qty >= MAX_QTY) showToast(`Maksimal ${MAX_QTY} untuk satu konfigurasi.`);
+                    else same.qty += 1;
+                } else cart.push(item);
+            }
+            saveCart();
+            updateCartUI();
+            $id('lens-modal').classList.add('hidden');
+            $id('cart-drawer').classList.remove('translate-x-full');
+        }
+
+        function editCartItem(id) {
+            const it = cart.find(i => i.id === id);
+            if (!it) return;
+            playAudio('click');
+            selectedConfigProduct = catalogProducts.find(x => x.id === it.frame.id) || it.frame;
+            resetConfigurator(it.color.hex);
+            editingCartId = id;
+            document.querySelector(`input[name="lens-type"][value="${it.lensType}"]`).checked = true;
+            COATINGS.forEach(c => { $id(c.id).checked = it.coatings.includes(c.label); });
+            applyLensTypeUI();
+            if (['fill', 'later', 'plano'].includes(it.rx.mode)) setRxMode(it.rx.mode);
+            if (it.rx.mode === 'fill') {
+                ['od', 'os'].forEach(e => RX_KEYS.forEach(k => { rxInput(e, k).value = (it.rx[e] && it.rx[e][k]) || ''; }));
+            }
+            applyRxModeUI();
+            updateLensPrice();
+            $id('modal-frame-title').innerText = 'Ubah konfigurasi - ' + selectedConfigProduct.name;
+            $id('lens-submit-btn').innerHTML = '<i class="fa-solid fa-check mr-2"></i> Simpan perubahan';
+            $id('cart-drawer').classList.add('translate-x-full');
+            $id('lens-modal').classList.remove('hidden');
+        }
+
+        function updateCartUI() {
+            const container = $id('cart-items-container');
+            $id('cart-badge').innerText = cartCount();
+
+            if (!cart.length) {
+                appliedVoucher = null;
+                container.innerHTML = `
+                    <div class="text-center py-12 text-slate-500 font-tech">
+                        <i class="fa-solid fa-bag-shopping text-4xl mb-3 block"></i>
+                        <p class="font-bold text-ink">Keranjang masih kosong</p>
+                        <p class="text-xs mt-1 mb-4">Pilih frame di katalog, lalu atur lensa dan resepnya.</p>
+                        <a href="#catalog" onclick="toggleCartDrawer()" class="inline-block px-4 py-2 rounded-md border border-slate-800 text-xs font-bold text-ink hover:border-cyber-cyan">Lihat katalog</a>
+                    </div>`;
+                $id('cart-subtotal').innerText = 'Rp 0';
+                $id('cart-discount').innerText = '- Rp 0';
+                $id('cart-final-total').innerText = 'Rp 0';
+                $id('voucher-code').value = '';
+                $id('voucher-msg').innerHTML = '';
+                saveCart();
+                return;
+            }
+
+            container.innerHTML = '';
+            cart.forEach(item => {
+                const el = document.createElement('div');
+                el.className = 'cyber-glass p-4 rounded-md border-slate-800 flex items-start gap-3 relative';
+                el.innerHTML = `
+                    <img src="${esc(item.frame.image)}" alt="" class="w-16 h-16 rounded-md object-cover border border-slate-800 shrink-0">
+                    <div class="flex-1 min-w-0">
+                        <h4 class="font-tech font-bold text-ink text-sm truncate">${esc(item.frame.name)}</h4>
+                        <p class="text-[11px] text-cyber-cyan font-tech">Warna ${esc(item.color.name)}, ${esc(LENS_LABEL[item.lensType])}</p>
+                        ${item.coatings.length ? `<p class="text-[10px] text-slate-400 font-tech">Lapisan: ${esc(item.coatings.join(', '))}</p>` : ''}
+                        <p class="text-[10px] text-slate-400 font-tech leading-snug mt-0.5">${rxLines(item.rx).map(esc).join('<br>')}</p>
+                        <div class="flex items-center justify-between mt-2">
+                            <div class="flex items-center border border-slate-800 rounded-md bg-white" role="group" aria-label="Jumlah">
+                                <button type="button" class="qty-btn" onclick="changeQty('${item.id}', -1)" ${item.qty <= 1 ? 'disabled' : ''} aria-label="Kurangi"><i class="fa-solid fa-minus text-[10px]"></i></button>
+                                <span class="w-7 text-center text-xs font-bold text-ink">${item.qty}</span>
+                                <button type="button" class="qty-btn" onclick="changeQty('${item.id}', 1)" ${item.qty >= MAX_QTY ? 'disabled' : ''} aria-label="Tambah"><i class="fa-solid fa-plus text-[10px]"></i></button>
+                            </div>
+                            <p class="text-sm font-tech font-bold text-ink">${rupiah(item.price * item.qty)}</p>
+                        </div>
+                        <button type="button" onclick="editCartItem('${item.id}')" class="mt-2 text-[11px] text-cyber-cyan font-tech hover:underline">Ubah konfigurasi</button>
+                    </div>
+                    <button onclick="removeFromCart('${item.id}')" class="text-slate-500 hover:text-rose-400 p-1" aria-label="Hapus ${esc(item.frame.name)}">
+                        <i class="fa-solid fa-trash text-xs"></i>
+                    </button>`;
+                container.appendChild(el);
+            });
+
+            const subtotal = cartSubtotal(), disc = voucherDiscount(subtotal);
+            $id('cart-subtotal').innerText = rupiah(subtotal);
+            $id('cart-discount').innerText = '- ' + rupiah(disc);
+            $id('cart-final-total').innerText = rupiah(subtotal - disc);
+            const msg = $id('voucher-msg');
+            if (appliedVoucher) {
+                msg.className = 'text-[11px] min-h-[16px] text-emerald-700';
+                msg.innerHTML = `Kode ${esc(appliedVoucher)} dipakai: ${esc(VOUCHERS[appliedVoucher].label)}. <button type="button" onclick="removeVoucher()" class="underline">Hapus</button>`;
+            } else msg.innerHTML = '';
+            saveCart();
+        }
+
+        function changeQty(id, d) {
+            const it = cart.find(i => i.id === id);
+            if (!it) return;
+            const q = it.qty + d;
+            if (q < 1) return;
+            if (q > MAX_QTY) { showToast(`Maksimal ${MAX_QTY} untuk satu konfigurasi.`); return; }
+            playAudio('click');
+            it.qty = q;
+            updateCartUI();
+        }
+        function removeFromCart(id) {
+            playAudio('click');
+            cart = cart.filter(item => item.id !== id);
+            updateCartUI();
+        }
+        function toggleCartDrawer() {
+            playAudio('click');
+            $id('cart-drawer').classList.toggle('translate-x-full');
+        }
+
+        function setVoucherMsg(text, isError) {
+            const m = $id('voucher-msg');
+            m.className = 'text-[11px] min-h-[16px] ' + (isError ? 'text-cyber-magenta' : 'text-emerald-700');
+            m.textContent = text;
+        }
+        function applyVoucher() {
+            const code = $id('voucher-code').value.trim().toUpperCase();
+            if (!cart.length) { playAudio('click'); setVoucherMsg('Tambahkan produk ke keranjang dulu.', true); return; }
+            if (!code) { playAudio('click'); setVoucherMsg('Masukkan kode promo.', true); return; }
+            if (!VOUCHERS[code]) { playAudio('click'); setVoucherMsg('Kode promo tidak dikenal. Periksa penulisannya.', true); return; }
+            playAudio('success');
+            appliedVoucher = code;
+            updateCartUI();
+        }
+        function removeVoucher() {
+            playAudio('click');
+            appliedVoucher = null; $id('voucher-code').value = '';
+            updateCartUI();
+        }
+
+        // ==========================================
+        // SNAPSHOT & COMPARE FEATURE
+        // ==========================================
+        let snapshots = [];
+
+        function takeSnapshot() {
+            playAudio('shutter');
+
+            // Offscreen canvas export with watermark
+            const offCanvas = document.createElement('canvas');
+            offCanvas.width = canvas.width;
+            offCanvas.height = canvas.height;
+            const offCtx = offCanvas.getContext('2d');
+
+            // Draw current background image / video frame
+            if (currentInputMode === 'webcam') {
+                offCtx.drawImage(video, 0, 0, offCanvas.width, offCanvas.height);
+            } else {
+                offCtx.drawImage(presetImg, 0, 0, offCanvas.width, offCanvas.height);
+            }
+
+            // Draw current tryon overlay
+            offCtx.drawImage(canvas, 0, 0);
+
+            // Add Futuristic Watermark
+            offCtx.fillStyle = '#ffffff';
+            offCtx.font = 'bold 15px Hanken Grotesk';
+            offCtx.fillText('Lumen Optics', 20, offCanvas.height - 20);
+
+            const dataUrl = offCanvas.toDataURL('image/png');
+            snapshots.push({
+                id: Date.now(),
+                frameName: activeFrame.name,
+                imgUrl: dataUrl
+            });
+
+            document.getElementById('snapshot-badge').innerText = snapshots.length;
+            document.getElementById('snapshot-badge').classList.remove('hidden');
+
+            openSnapshotModal();
+        }
+
+        function openSnapshotModal() {
+            playAudio('click');
+            const grid = document.getElementById('snapshots-grid');
+            grid.innerHTML = '';
+
+            if (snapshots.length === 0) {
+                grid.innerHTML = '<p class="text-slate-400 font-tech text-center col-span-full py-8">Belum ada snapshot yang diambil. Klik "Ambil Snapshot" di studio.</p>';
+            } else {
+                snapshots.forEach(s => {
+                    const card = document.createElement('div');
+                    card.className = 'cyber-glass p-3 rounded-md border-slate-800';
+                    card.innerHTML = `
+                        <img src="${s.imgUrl}" class="w-full aspect-[4/3] rounded-md object-cover mb-2 border border-slate-800">
+                        <p class="font-tech font-bold text-ink text-xs">${s.frameName}</p>
+                    `;
+                    grid.appendChild(card);
+                });
+            }
+
+            document.getElementById('snapshot-modal').classList.remove('hidden');
+        }
+
+        function closeSnapshotModal() {
+            playAudio('click');
+            document.getElementById('snapshot-modal').classList.add('hidden');
+        }
+
+        // ==========================================
+        // CHECKOUT RECEIPT MODAL
+        // ==========================================
+        const SHIPPING = [
+            { id:'reg', name:'Reguler', est:'3 - 5 hari kerja', fee:20000 },
+            { id:'exp', name:'Express Optical', est:'2 - 3 hari kerja', fee:45000 },
+            { id:'pick', name:'Ambil di toko', est:'Siap diambil 1 hari kerja', fee:0 }
+        ];
+        const PAYMENTS = [
+            { id:'qris', name:'QRIS', desc:'Scan dengan aplikasi bank atau e-wallet apa saja' },
+            { id:'va', name:'Transfer Bank (Virtual Account)', desc:'BCA, BNI, BRI, Mandiri', sub:['BCA','BNI','BRI','Mandiri'] },
+            { id:'ewallet', name:'E-Wallet', desc:'GoPay, OVO, DANA, ShopeePay', sub:['GoPay','OVO','DANA','ShopeePay'] },
+            { id:'cod', name:'Bayar di Tempat (COD)', desc:'Bayar tunai ke kurir saat pesanan tiba', noPickup:true }
+        ];
+        let currentUser = null, pendingCheckout = false, pendingOrders = false, authMode = 'login', lastFocus = null;
+        const rupiah = n => 'Rp ' + n.toLocaleString('id-ID');
+        const $id = id => document.getElementById(id);
+
+        function showToast(msg) {
+            const t = $id('lo-toast'); t.textContent = msg; t.classList.add('on');
+            clearTimeout(showToast._t); showToast._t = setTimeout(() => t.classList.remove('on'), 3000);
+        }
+
+        // ---------- Login / Daftar (tanpa database) ----------
+        function storeGet(k) { try { return JSON.parse(localStorage.getItem(k)); } catch (e) { return null; } }
+        function storeSet(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} }
+        function initAuth() { const u = storeGet('lumen_user'); if (u && u.email) { currentUser = u; refreshAuthUI(); } }
+        function refreshAuthUI() {
+            const on = !!currentUser;
+            $id('auth-btn').classList.toggle('hidden', on);
+            $id('user-chip').classList.toggle('hidden', !on); $id('user-chip').classList.toggle('flex', on);
+            if (on) $id('user-name').textContent = currentUser.name;
+            updateOrdersBadge();
+        }
+        function openAuthModal(mode, fromCheckout) {
+            pendingCheckout = fromCheckout === true; pendingOrders = fromCheckout === 'orders'; playAudio('click'); lastFocus = document.activeElement;
+            $id('auth-note-text').textContent = pendingOrders ? 'Masuk dulu untuk melihat pesanan Anda.' : 'Masuk dulu untuk melanjutkan checkout. Keranjang Anda tetap tersimpan.';
+            $id('auth-note').classList.toggle('hidden', !fromCheckout);
+            switchAuthTab(mode || 'login');
+            $id('auth-modal').classList.remove('hidden');
+            setTimeout(() => $id(authMode === 'register' ? 'auth-name' : 'auth-email').focus(), 30);
+        }
+        function closeAuthModal() { $id('auth-modal').classList.add('hidden'); pendingCheckout = false; pendingOrders = false; if (lastFocus) lastFocus.focus(); }
+        function switchAuthTab(mode) {
+            authMode = mode;
+            $id('tab-login').setAttribute('aria-selected', mode === 'login');
+            $id('tab-register').setAttribute('aria-selected', mode === 'register');
+            $id('field-name').classList.toggle('hidden', mode !== 'register');
+            $id('auth-submit').textContent = mode === 'register' ? 'Buat akun' : 'Masuk';
+            $id('auth-pass').autocomplete = mode === 'register' ? 'new-password' : 'current-password';
+            $id('auth-err').textContent = '';
+        }
+        function submitAuth() {
+            const name = $id('auth-name').value.trim(), email = $id('auth-email').value.trim().toLowerCase(), pass = $id('auth-pass').value;
+            const err = m => { $id('auth-err').textContent = m; playAudio('click'); };
+            if (authMode === 'register' && name.length < 2) return err('Isi nama lengkap Anda.');
+            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return err('Format email belum benar.');
+            if (!pass) return err('Isi kata sandi.');
+            if (authMode === 'register' && pass.length < 6) return err('Kata sandi minimal 6 karakter.');
+            const users = storeGet('lumen_users') || [];
+            let user = users.find(u => u.email === email);
+            if (authMode === 'register') {
+                user = { name, email }; storeSet('lumen_users', users.filter(u => u.email !== email).concat(user));
+            } else if (!user) {
+                const local = email.split('@')[0].replace(/[._-]+/g, ' ');
+                user = { name: local.replace(/\b\w/g, c => c.toUpperCase()), email };
+            }
+            currentUser = user; storeSet('lumen_user', user);
+            $id('auth-pass').value = ''; refreshAuthUI(); playAudio('success');
+            $id('auth-modal').classList.add('hidden');
+            showToast('Halo, ' + user.name + '! Anda sudah masuk.');
+            if (pendingCheckout) { pendingCheckout = false; openCheckoutForm(); }
+            else if (pendingOrders) { pendingOrders = false; openOrdersModal(); }
+        }
+        function logout() {
+            currentUser = null; try { localStorage.removeItem('lumen_user'); } catch (e) {}
+            refreshAuthUI(); playAudio('click'); showToast('Anda sudah keluar.');
+        }
+
+        // ---------- Checkout ----------
+        function openCheckoutModal() {   // dipanggil tombol "Lanjut ke checkout"
+            if (cart.length === 0) { showToast('Keranjang belanja Anda masih kosong.'); return; }
+            if (!currentUser) {
+                $id('cart-drawer').classList.add('translate-x-full');
+                pendingCheckout = true; openAuthModal('login', true); return;
+            }
+            openCheckoutForm();
+        }
+        function radioCard(group, o, checked, extra) {
+            return `<label class="lo-opt"><input type="radio" name="${group}" value="${o.id}" ${checked ? 'checked' : ''} onchange="coChanged()">
+                <span class="flex-1"><b class="block text-ink">${o.name}</b><span class="text-slate-400">${o.desc || o.est}</span></span>${extra || ''}</label>`;
+        }
+        function openCheckoutForm() {
+            playAudio('success'); lastFocus = document.activeElement;
+            $id('cart-drawer').classList.add('translate-x-full');
+            if (!$id('co-name').value) $id('co-name').value = currentUser.name;
+            $id('co-shipping').innerHTML = SHIPPING.map((o, i) => radioCard('co-ship', o, i === 0, `<b class="text-ink whitespace-nowrap">${o.fee ? rupiah(o.fee) : 'Gratis'}</b>`)).join('');
+            $id('co-payment').innerHTML = PAYMENTS.map((o, i) => radioCard('co-pay', o, i === 0)).join('');
+            $id('co-items').innerHTML = cart.map(i => `<div class="flex gap-3 items-center"><img src="${i.frame.image}" class="w-12 h-12 rounded object-cover border border-slate-800" alt="">
+                <div class="flex-1 min-w-0 text-xs"><b class="block text-ink truncate">${i.frame.name}</b><span class="text-slate-400">${esc(LENS_LABEL[i.lensType])}, ${i.qty} pcs</span></div><b class="text-xs text-ink">${rupiah(i.price * i.qty)}</b></div>`).join('');
+            $id('co-err').textContent = '';
+            coChanged(); $id('checkout-form-modal').classList.remove('hidden');
+        }
+        function closeCheckoutForm() { $id('checkout-form-modal').classList.add('hidden'); if (lastFocus) lastFocus.focus(); }
+        const picked = g => { const r = document.querySelector(`input[name="${g}"]:checked`); return r ? r.value : null; };
+        function coChanged() {
+            const ship = SHIPPING.find(o => o.id === picked('co-ship')) || SHIPPING[0];
+            const pickup = ship.id === 'pick';
+            // COD tidak tersedia untuk ambil di toko
+            const cod = document.querySelector('input[name="co-pay"][value="cod"]');
+            if (cod) { cod.disabled = pickup; cod.closest('label').style.opacity = pickup ? .45 : 1; if (pickup && cod.checked) document.querySelector('input[name="co-pay"][value="qris"]').checked = true; }
+            const pay = PAYMENTS.find(o => o.id === picked('co-pay')) || PAYMENTS[0];
+            const old = document.querySelector('#co-pay-sub select'); const keep = old ? old.value : '';
+            $id('co-pay-sub').innerHTML = pay.sub ? `<label class="lo-label" for="co-pay-choice">Pilih ${pay.id === 'va' ? 'bank' : 'e-wallet'}</label>
+                <select id="co-pay-choice" class="lo-input" style="max-width:260px"><option value="">Pilih salah satu</option>${pay.sub.map(x => `<option ${x === keep ? 'selected' : ''}>${x}</option>`).join('')}</select>` : '';
+            const subtotal = cartSubtotal(), disc = voucherDiscount(subtotal);
+            $id('co-sub').textContent = rupiah(subtotal); $id('co-disc').textContent = '- ' + rupiah(disc);
+            $id('co-ship').textContent = ship.fee ? rupiah(ship.fee) : 'Gratis';
+            $id('co-total').textContent = rupiah(subtotal - disc + ship.fee);
+        }
+        function submitCheckout() {
+            if (!cart.length || !currentUser) return;
+            const f = { name:'co-name', phone:'co-phone', address:'co-address', city:'co-city', province:'co-province', zip:'co-zip' };
+            const v = k => $id(f[k]).value.trim();
+            const ship = SHIPPING.find(o => o.id === picked('co-ship')), pay = PAYMENTS.find(o => o.id === picked('co-pay'));
+            const pickup = ship.id === 'pick';
+            const checks = [
+                ['name', v('name').length >= 2, 'Isi nama penerima.'],
+                ['phone', /^(\+62|62|0)8\d{7,11}$/.test(v('phone').replace(/[\s-]/g, '')), 'Nomor HP belum benar. Contoh: 081234567890.'],
+                ['address', pickup || v('address').length >= 10, 'Isi alamat lengkap (minimal 10 karakter).'],
+                ['city', pickup || v('city').length >= 2, 'Isi kota atau kabupaten.'],
+                ['province', pickup || !!v('province'), 'Pilih provinsi.'],
+                ['zip', pickup || /^\d{5}$/.test(v('zip')), 'Kode pos harus 5 digit angka.']
+            ];
+            Object.values(f).forEach(id => $id(id).removeAttribute('aria-invalid'));
+            for (const [k, ok, msg] of checks) if (!ok) { $id(f[k]).setAttribute('aria-invalid', 'true'); $id(f[k]).focus(); $id('co-err').textContent = msg; playAudio('click'); return; }
+            const choice = $id('co-pay-choice') ? $id('co-pay-choice').value : null;
+            if (pay.sub && !choice) { $id('co-err').textContent = 'Pilih ' + (pay.id === 'va' ? 'bank' : 'e-wallet') + ' untuk pembayaran.'; $id('co-pay-choice').focus(); return; }
+
+            const order = createOrder({
+                ship, pay, choice,
+                addr: { name: v('name'), phone: v('phone'), address: v('address'), city: v('city'), province: v('province'), zip: v('zip'), note: $id('co-note').value.trim(), pickup }
+            });
+            playAudio('success');
+            $id('checkout-form-modal').classList.add('hidden');
+            showOrderConfirm(order);
+        }
+
+        // ==========================================
+        // PESANAN: simpan, status, konfirmasi
+        // ==========================================
+        const ORDER_STEPS = [
+            { id:'dibuat', label:'Pesanan dibuat' },
+            { id:'dibayar', label:'Pembayaran diterima' },
+            { id:'resep', label:'Resep diterima' },
+            { id:'diproses', label:'Lensa dibuat dan diperiksa' },
+            { id:'dikirim', label:'Dalam pengiriman' },
+            { id:'selesai', label:'Pesanan selesai' }
+        ];
+        const PAY_WINDOW_MIN = { qris: 60, va: 24 * 60, ewallet: 120 };
+        const fmtDT = iso => new Date(iso).toLocaleString('id-ID', { day:'2-digit', month:'short', year:'numeric', hour:'2-digit', minute:'2-digit' });
+        const nowISO = () => new Date().toISOString();
+
+        function getOrders() { const o = storeGet('lumen_orders'); return Array.isArray(o) ? o : []; }
+        function saveOrders(list) { storeSet('lumen_orders', list); }
+        function flowFor(o) {
+            return ORDER_STEPS
+                .filter(s => !(s.id === 'dibayar' && o.payment.id === 'cod') && !(s.id === 'resep' && !o.needsRx))
+                .map(s => s.id === 'dikirim' && o.shipping.id === 'pick' ? { ...s, label: 'Siap diambil di toko' } : s);
+        }
+        function expireOrders(list) {
+            let changed = false;
+            list.forEach(o => {
+                if (o.status === 'dibuat' && o.payment.id !== 'cod' && Date.now() > Date.parse(o.deadline)) {
+                    o.status = 'kedaluwarsa'; o.events.push({ s: 'kedaluwarsa', at: nowISO() }); changed = true;
+                }
+            });
+            return changed;
+        }
+        function loadOrders() { const list = getOrders(); if (expireOrders(list)) saveOrders(list); return list; }
+        const myOrders = () => currentUser
+            ? loadOrders().filter(o => o.email === currentUser.email).sort((a, b) => b.createdAt.localeCompare(a.createdAt))
+            : [];
+        const isActiveOrder = o => !['selesai', 'dibatalkan', 'kedaluwarsa'].includes(o.status);
+        function updateOrdersBadge() {
+            const b = $id('orders-badge'); if (!b) return;
+            const n = myOrders().filter(isActiveOrder).length;
+            b.innerText = n; b.classList.toggle('hidden', n === 0);
+        }
+
+        function createOrder({ ship, pay, choice, addr }) {
+            const subtotal = cartSubtotal(), disc = voucherDiscount(subtotal), total = subtotal - disc + ship.fee;
+            const list = getOrders();
+            const d = new Date();
+            let id;
+            do { id = 'LMN-' + d.getFullYear() + String(d.getMonth() + 1).padStart(2, '0') + String(d.getDate()).padStart(2, '0') + '-' + Math.random().toString(36).slice(2, 6).toUpperCase(); }
+            while (list.some(o => o.id === id));
+            const order = {
+                id, createdAt: nowISO(), email: currentUser.email,
+                items: JSON.parse(JSON.stringify(cart)),
+                subtotal, discount: disc, voucher: appliedVoucher,
+                shipping: { id: ship.id, name: ship.name, est: ship.est, fee: ship.fee },
+                payment: { id: pay.id, name: pay.name, choice: choice || '', va: pay.id === 'va' ? '8808' + Math.floor(1e11 + Math.random() * 9e11) : '' },
+                address: addr, total,
+                needsRx: cart.some(i => i.rx && i.rx.mode === 'later'),
+                status: 'dibuat',
+                deadline: pay.id === 'cod' ? null : new Date(Date.now() + PAY_WINDOW_MIN[pay.id] * 60000).toISOString(),
+                events: [{ s: 'dibuat', at: nowISO() }]
+            };
+            list.push(order);
+            saveOrders(list);
+            // keranjang dikosongkan segera setelah pesanan tersimpan
+            cart = []; appliedVoucher = null;
+            updateCartUI();
+            updateOrdersBadge();
+            return order;
+        }
+
+        function badgeOf(o) {
+            const amber = 'bg-amber-100 text-amber-800', blue = 'bg-blue-100 text-blue-800', green = 'bg-emerald-100 text-emerald-800';
+            if (o.status === 'dibatalkan') return { text: 'Dibatalkan', cls: 'bg-slate-800 text-slate-300' };
+            if (o.status === 'kedaluwarsa') return { text: 'Kedaluwarsa', cls: 'bg-rose-100 text-rose-800' };
+            const steps = flowFor(o), i = steps.findIndex(s => s.id === o.status), next = steps[i + 1];
+            if (o.status === 'dibuat' && o.payment.id !== 'cod') return { text: 'Menunggu pembayaran', cls: amber };
+            if (next && next.id === 'resep') return { text: 'Menunggu resep', cls: amber };
+            if (o.status === 'selesai') return { text: 'Selesai', cls: green };
+            return { text: steps[i].label, cls: blue };
+        }
+        const badgeHTML = o => { const b = badgeOf(o); return `<span class="px-2.5 py-1 rounded-full text-[11px] font-bold ${b.cls}">${esc(b.text)}</span>`; };
+
+        function waLink(o, kind) {
+            const lines = kind === 'rx'
+                ? [`Halo Lumen Optics, saya mengirim resep untuk pesanan ${o.id}.`, 'Foto resep saya lampirkan di chat ini.']
+                : [`Halo Lumen Optics, saya ingin menanyakan pesanan ${o.id}.`];
+            lines.push(`Nama: ${o.address.name}`, `Total: ${rupiah(o.total)}`);
+            return 'https://wa.me/' + STORE_WA + '?text=' + encodeURIComponent(lines.join('\n'));
+        }
+        function copyText(t) {
+            try { navigator.clipboard.writeText(t).then(() => showToast('Nomor disalin.')); } catch (e) { showToast('Salin manual: ' + t); }
+        }
+        const rxPending = o => o.needsRx && !o.events.some(e => e.s === 'resep');
+
+        function payBlock(o) {
+            const pay = o.payment;
+            let body;
+            if (pay.id === 'va') body = `Transfer <b>${rupiah(o.total)}</b> ke Virtual Account ${esc(pay.choice)}:
+                <div class="mt-2 flex items-center gap-2"><code class="font-mono font-bold text-sm">${esc(pay.va)}</code><button type="button" onclick="copyText('${esc(pay.va)}')" class="text-[11px] text-cyber-cyan hover:underline">Salin</button></div>`;
+            else if (pay.id === 'qris') body = `Bayar <b>${rupiah(o.total)}</b> dengan scan QRIS dari aplikasi bank atau e-wallet.<p class="mt-1 text-slate-400">Kode QR tampil di sini setelah toko terhubung ke payment gateway.</p>`;
+            else if (pay.id === 'ewallet') body = `Selesaikan pembayaran <b>${rupiah(o.total)}</b> di aplikasi ${esc(pay.choice)}.`;
+            else body = `Siapkan uang tunai <b>${rupiah(o.total)}</b>. Kurir akan menagihnya saat pesanan tiba.`;
+            const dl = o.deadline ? `<p class="mt-2 text-amber-800 font-semibold">Bayar sebelum ${fmtDT(o.deadline)}</p>` : '';
+            return `<div class="rounded-md border border-slate-800 bg-slate-950/60 p-3 text-xs text-ink">${body}${dl}</div>`;
+        }
+        function rxNoteHTML(o) {
+            return `<div class="rounded-md border border-amber-200 bg-amber-50 p-3 text-xs text-amber-800">Resep Anda belum kami terima. Kirim foto resep lewat WhatsApp agar lensa bisa mulai dibuat.
+                <a href="${waLink(o, 'rx')}" target="_blank" rel="noopener" class="mt-2 inline-flex items-center gap-2 px-3 py-2 rounded-md bg-emerald-600 text-white font-bold"><i class="fa-brands fa-whatsapp"></i> Kirim resep sekarang</a></div>`;
+        }
+        function itemsHTML(o) {
+            return o.items.map(it => `<div class="flex gap-3 text-xs">
+                <img src="${esc(it.frame.image)}" alt="" class="w-12 h-12 rounded object-cover border border-slate-800 shrink-0">
+                <div class="flex-1 min-w-0"><b class="block text-ink truncate">${esc(it.frame.name)} x${it.qty}</b>
+                    <span class="text-slate-400 block">Warna ${esc(it.color.name)}, ${esc(LENS_LABEL[it.lensType] || it.lensType)}</span>
+                    <span class="text-slate-400 block">${rxLines(it.rx).map(esc).join('<br>')}</span></div>
+                <b class="text-ink">${rupiah(it.price * it.qty)}</b></div>`).join('');
+        }
+        function addressText(o) {
+            const a = o.address;
+            return a.pickup ? 'Diambil di toko Lumen Optics' : `${a.address}, ${a.city}, ${a.province} ${a.zip}`;
+        }
+
+        // ---- konfirmasi setelah checkout
+        function showOrderConfirm(o) {
+            $id('oc-id').textContent = o.id;
+            $id('oc-body').innerHTML = `
+                <div class="flex items-center justify-between"><span class="text-xs text-slate-400">Status</span>${badgeHTML(o)}</div>
+                ${payBlock(o)}
+                ${rxPending(o) ? rxNoteHTML(o) : ''}
+                <div class="space-y-3">${itemsHTML(o)}</div>
+                <dl class="text-xs space-y-1.5 pt-3 border-t border-slate-800">
+                    <div class="flex justify-between gap-4"><dt class="text-slate-400">Penerima</dt><dd class="text-right text-ink">${esc(o.address.name)} (${esc(o.address.phone)})</dd></div>
+                    <div class="flex justify-between gap-4"><dt class="text-slate-400">Alamat</dt><dd class="text-right text-ink">${esc(addressText(o))}</dd></div>
+                    <div class="flex justify-between gap-4"><dt class="text-slate-400">Pengiriman</dt><dd class="text-right text-ink">${esc(o.shipping.name)} (${esc(o.shipping.est)})</dd></div>
+                    <div class="flex justify-between gap-4"><dt class="text-slate-400">Ongkos kirim</dt><dd class="text-ink">${o.shipping.fee ? rupiah(o.shipping.fee) : 'Gratis'}</dd></div>
+                    ${o.discount ? `<div class="flex justify-between gap-4"><dt class="text-slate-400">Diskon</dt><dd class="text-emerald-700">- ${rupiah(o.discount)}</dd></div>` : ''}
+                    <div class="flex justify-between gap-4 text-sm font-bold"><dt>Total</dt><dd class="text-cyber-cyan">${rupiah(o.total)}</dd></div>
+                </dl>
+                <p class="text-[11px] text-slate-400">Mode demo: belum ada pembayaran sungguhan. Status pesanan bisa disimulasikan di halaman Pesanan saya.</p>`;
+            $id('oc-actions').innerHTML = `
+                <button onclick="closeOrderConfirm(); openOrdersModal('${o.id}')" class="w-full py-3 rounded-md bg-cyber-cyan text-slate-950 font-tech font-bold text-sm">Lihat status pesanan</button>
+                <a href="${waLink(o, 'help')}" target="_blank" rel="noopener" class="w-full py-3 rounded-md border border-slate-800 text-center text-ink font-tech font-bold text-sm hover:border-cyber-cyan"><i class="fa-brands fa-whatsapp mr-1"></i> Hubungi toko lewat WhatsApp</a>
+                <button onclick="closeOrderConfirm()" class="w-full py-2 text-xs text-slate-400 hover:text-ink">Tutup</button>`;
+            lastFocus = document.activeElement;
+            $id('order-confirm-modal').classList.remove('hidden');
+        }
+        function closeOrderConfirm() {
+            playAudio('click');
+            $id('order-confirm-modal').classList.add('hidden');
+            showToast('Pesanan tersimpan di menu Pesanan saya.');
+        }
+
+        // ---- daftar pesanan
+        function openOrdersModal(openId) {
+            playAudio('click');
+            if (!currentUser) { $id('cart-drawer').classList.add('translate-x-full'); openAuthModal('login', 'orders'); return; }
+            lastFocus = document.activeElement;
+            renderOrders(openId);
+            $id('orders-modal').classList.remove('hidden');
+        }
+        function closeOrdersModal() { playAudio('click'); $id('orders-modal').classList.add('hidden'); if (lastFocus) lastFocus.focus(); }
+
+        function orderCard(o, open) {
+            const steps = flowFor(o), idx = steps.findIndex(s => s.id === o.status);
+            const terminal = o.status === 'dibatalkan' || o.status === 'kedaluwarsa';
+            const timeline = terminal
+                ? `<li class="text-xs text-ink font-semibold">${esc(badgeOf(o).text)}<span class="block font-normal text-slate-400">${fmtDT(o.events[o.events.length - 1].at)}</span></li>`
+                : steps.map((s, i) => {
+                    const ev = o.events.find(e => e.s === s.id), done = i <= idx;
+                    return `<li class="flex gap-3 items-start"><span class="mt-1.5 w-2.5 h-2.5 rounded-full shrink-0 ${done ? 'bg-cyber-cyan' : 'bg-slate-700'}"></span>
+                        <span class="text-xs ${done ? 'text-ink font-semibold' : 'text-slate-400'}">${esc(s.label)}${ev ? `<span class="block font-normal text-slate-400">${fmtDT(ev.at)}</span>` : ''}</span></li>`;
+                }).join('');
+
+            let actions = '';
+            if (!terminal && o.status !== 'selesai') {
+                const next = steps[idx + 1];
+                const label = o.status === 'dibuat' && o.payment.id !== 'cod' ? 'Simulasikan pembayaran berhasil' : `Simulasikan: ${next.label}`;
+                actions += `<button onclick="orderAction('${o.id}','advance')" class="px-3 py-2 rounded-md bg-ink text-white text-xs font-bold">${esc(label)}</button>`;
+            }
+            if (o.status === 'dibuat') actions += `<button onclick="orderAction('${o.id}','cancel')" class="px-3 py-2 rounded-md border border-slate-800 text-xs font-bold text-ink hover:border-rose-400">Batalkan pesanan</button>`;
+            actions += `<a href="${waLink(o, 'help')}" target="_blank" rel="noopener" class="px-3 py-2 rounded-md border border-slate-800 text-xs font-bold text-ink hover:border-cyber-cyan"><i class="fa-brands fa-whatsapp mr-1"></i> Tanya toko</a>`;
+            actions += `<button onclick="orderAction('${o.id}','reorder')" class="px-3 py-2 rounded-md border border-slate-800 text-xs font-bold text-ink hover:border-cyber-cyan">Pesan lagi</button>`;
+
+            return `<details class="lo-order" ${open ? 'open' : ''}>
+                <summary class="flex items-center justify-between gap-3">
+                    <span><b class="block font-tech text-sm text-ink font-mono">${esc(o.id)}</b><span class="text-[11px] text-slate-400">${fmtDT(o.createdAt)}, ${o.items.reduce((a, i) => a + i.qty, 0)} item</span></span>
+                    <span class="text-right">${badgeHTML(o)}<b class="block text-sm text-ink mt-1">${rupiah(o.total)}</b></span>
+                </summary>
+                <div class="p-4 space-y-4">
+                    ${o.status === 'dibuat' ? payBlock(o) : ''}
+                    ${o.status !== 'dibatalkan' && o.status !== 'kedaluwarsa' && o.status !== 'selesai' && rxPending(o) ? rxNoteHTML(o) : ''}
+                    ${o.resi ? `<div class="text-xs rounded-md border border-slate-800 bg-slate-950/60 p-3">Nomor resi: <code class="font-mono font-bold">${esc(o.resi)}</code> <button type="button" onclick="copyText('${esc(o.resi)}')" class="ml-2 text-[11px] text-cyber-cyan hover:underline">Salin</button></div>` : ''}
+                    <ol class="space-y-2.5">${timeline}</ol>
+                    <div class="space-y-3 pt-3 border-t border-slate-800">${itemsHTML(o)}</div>
+                    <dl class="text-xs space-y-1.5 pt-3 border-t border-slate-800">
+                        <div class="flex justify-between gap-4"><dt class="text-slate-400">Penerima</dt><dd class="text-right text-ink">${esc(o.address.name)} (${esc(o.address.phone)})</dd></div>
+                        <div class="flex justify-between gap-4"><dt class="text-slate-400">Alamat</dt><dd class="text-right text-ink">${esc(addressText(o))}</dd></div>
+                        <div class="flex justify-between gap-4"><dt class="text-slate-400">Pengiriman</dt><dd class="text-right text-ink">${esc(o.shipping.name)} (${esc(o.shipping.est)})</dd></div>
+                        <div class="flex justify-between gap-4"><dt class="text-slate-400">Pembayaran</dt><dd class="text-right text-ink">${esc(o.payment.name)}${o.payment.choice ? ' - ' + esc(o.payment.choice) : ''}</dd></div>
+                        ${o.discount ? `<div class="flex justify-between gap-4"><dt class="text-slate-400">Diskon ${esc(o.voucher || '')}</dt><dd class="text-emerald-700">- ${rupiah(o.discount)}</dd></div>` : ''}
+                    </dl>
+                    <div class="flex flex-wrap gap-2">${actions}</div>
+                </div>
+            </details>`;
+        }
+        function renderOrders(openId) {
+            const list = myOrders(), box = $id('orders-list');
+            if (!list.length) {
+                box.innerHTML = `<div class="text-center py-12 text-slate-500 font-tech"><i class="fa-solid fa-receipt text-4xl mb-3 block"></i>
+                    <p class="font-bold text-ink">Belum ada pesanan</p><p class="text-xs mt-1">Pesanan yang Anda buat muncul di sini lengkap dengan statusnya.</p></div>`;
+                return;
+            }
+            box.innerHTML = list.map((o, i) => orderCard(o, o.id === openId || (!openId && i === 0 && isActiveOrder(o)))).join('');
+        }
+
+        function orderAction(id, act) {
+            const list = getOrders(), o = list.find(x => x.id === id);
+            if (!o) return;
+            if (act === 'advance') {
+                const steps = flowFor(o), idx = steps.findIndex(s => s.id === o.status), next = steps[idx + 1];
+                if (!next) return;
+                o.status = next.id; o.events.push({ s: next.id, at: nowISO() });
+                if (next.id === 'dikirim' && o.shipping.id !== 'pick') o.resi = (o.shipping.id === 'exp' ? 'LMX' : 'LMR') + Math.floor(1e9 + Math.random() * 9e9);
+                playAudio('success');
+            } else if (act === 'cancel') {
+                if (!confirm('Batalkan pesanan ' + o.id + '?')) return;
+                o.status = 'dibatalkan'; o.events.push({ s: 'dibatalkan', at: nowISO() });
+                showToast('Pesanan dibatalkan.');
+            } else if (act === 'reorder') {
+                o.items.forEach(it => {
+                    const copy = JSON.parse(JSON.stringify(it)); copy.id = uid();
+                    const same = cart.find(c => c.key === copy.key);
+                    if (same) same.qty = Math.min(MAX_QTY, same.qty + copy.qty); else cart.push(copy);
+                });
+                updateCartUI();
+                $id('orders-modal').classList.add('hidden');
+                $id('cart-drawer').classList.remove('translate-x-full');
+                showToast('Item pesanan dimasukkan ke keranjang.');
+                return;
+            }
+            saveOrders(list);
+            updateOrdersBadge();
+            renderOrders(id);
+        }
+
+        // Initialize application on document load
+        window.onload = function() {
+            initTryOnCanvas();
+            renderCatalog(catalogProducts);
+            initAuth();
+            initCart();
+            updateOrdersBadge();
+        };
+    
+        document.addEventListener('keydown', (e) => {
+            if (e.key !== 'Escape') return;
+            ['lens-modal','cart-drawer','snapshot-modal','order-confirm-modal','orders-modal','auth-modal','checkout-form-modal'].forEach(id => {
+                const el = document.getElementById(id);
+                if (el && id !== 'cart-drawer') el.classList.add('hidden');
+            });
+            const drawer = document.getElementById('cart-drawer');
+            if (drawer) drawer.classList.add('translate-x-full');
+        });
+</script>
+</body>
+</html>
